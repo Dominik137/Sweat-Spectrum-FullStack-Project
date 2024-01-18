@@ -34,8 +34,8 @@ def login():
         # we are querying to see if the data being sent to use "posted" is the username that matches one in our database
         if gotten_user:
             # if that user exits we are setting them to the session for login purposes
-            session["user"] = gotten_user
-            return gotten_user.to_dict()
+            session["user"] = gotten_user.id
+            return gotten_user.to_dict(),200
         else:
             return{"Error": "Not Valid Username"}, 400
 

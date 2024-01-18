@@ -15,6 +15,8 @@ function handleSubmit(e){
             user_name: username
         })
     }
+
+    // FIX THIS WHOLE THIONGIGNGINGIGNIGNIGNGIGNIIGINGIN
     )
     .then(r=> {
         if(r.ok){
@@ -25,7 +27,7 @@ function handleSubmit(e){
         }
       })
       .then(data => setUser(data))
-   })
+   },[])
 }
   return (
     <>
