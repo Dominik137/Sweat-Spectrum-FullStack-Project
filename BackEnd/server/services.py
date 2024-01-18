@@ -6,6 +6,12 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flask_bcrypt import Bcrypt
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Access variables using os.environ
+secret_key = os.environ.get("SECRET_KEY")
 
 metadata = MetaData(naming_convention={
     "ix": "ix_%(column_0_label)s",

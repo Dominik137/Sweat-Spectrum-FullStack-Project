@@ -8,13 +8,21 @@ from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from flask_cors import CORS
 from models import User
-from services import api, app, db
+from services import api, app, db, secret_key
+
+
 
 @app.route('/')
 def home():
     pass
 
+@app.route('/login')
+def login():
+    pass
 
+@app.route('/logout')
+def logout():
+    pass
 
 
 
