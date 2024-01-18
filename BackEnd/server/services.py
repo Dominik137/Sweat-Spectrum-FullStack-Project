@@ -16,6 +16,7 @@ metadata = MetaData(naming_convention={
     })
 
 db = SQLAlchemy(metadata=metadata)
+bcrypt = Bcrypt()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SweatSpectrum.db'
