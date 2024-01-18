@@ -24,6 +24,8 @@ metadata = MetaData(naming_convention={
 db = SQLAlchemy(metadata=metadata)
 bcrypt = Bcrypt()
 
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SweatSpectrum.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -31,6 +33,11 @@ app.json.compact = False
 
 migrate = Migrate(app, db)
 db.init_app(app)
+
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SECRET_KEY'] = secret_key
+# for handeling our cookies and session
 
 api = Api(app)
 CORS(app)
