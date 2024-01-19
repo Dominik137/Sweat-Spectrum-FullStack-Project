@@ -9,8 +9,9 @@ from services import db, bcrypt
 class User(db.Model, SerializerMixin):
     __tablename__ = "Users"
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String)
+
 
     @hybrid_property
     def password(self):
