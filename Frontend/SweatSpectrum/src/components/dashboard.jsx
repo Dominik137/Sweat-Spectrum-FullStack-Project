@@ -6,6 +6,7 @@ function Dashboard(){
         //Full dashboard page that contains the high level stats, individual workouts for a single user, and an "Add Workout" button.
         <div>
             <h1>Dashboard</h1>
+            <DashStats />
             <p>StatsPro</p>
             <p>Logout</p>
             <hr/>
@@ -13,7 +14,6 @@ function Dashboard(){
                 <p>Add a new workout</p>
                 <button>+</button>
             </div>
-            <DashStats />
             <WorkoutList />
         </div>
     )
