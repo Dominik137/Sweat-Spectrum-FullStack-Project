@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 import './App.css'
 import Nav from './components/Nav';
-
+import Home from './components/Home';
+import Dashboard from './components/dashboard';
 
 import {
   createBrowserRouter,
@@ -18,7 +19,6 @@ import {
 // import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  const [count, setCount] = useState(0)
 
 
   return (
@@ -27,23 +27,12 @@ function App() {
         <BrowserRouter>
         <Nav/>
         <Routes>
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/community" element ={<CommunityPage/>} />
-          <Route path="/contact" element={<ContactPage/>} />
-          <Route path="/about" element={<AboutMe/>} /> */}
+          <Route path="/" element={<Home />}/>  
+          <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
-        <Footer />
-        <ScrollToTop/>
+        {/* <Footer /> */}
+        {/* <ScrollToTop/> */}
       </BrowserRouter>
-
-
-
-
-
-
-
-
-
       
     </div>
   )
