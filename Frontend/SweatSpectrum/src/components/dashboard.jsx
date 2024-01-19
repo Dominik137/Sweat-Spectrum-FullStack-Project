@@ -1,5 +1,5 @@
-import DashStats from "./dash_stats"
-import WorkoutList from "./dash_workouts"
+import DashStats from "./DashStats"
+import WorkoutList from "./DashWorkouts"
 
 function Dashboard(){
     return(
