@@ -19,6 +19,7 @@ class Set(db.Model, SerializerMixin):
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='Set')
 
+
 class Workout(db.Model, SerializerMixin):
     __tablename__ = "Workouts"
     id = db.Column(db.Integer, primary_key=True)
@@ -30,6 +31,18 @@ class Workout(db.Model, SerializerMixin):
 
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='Workout')
+
+    #Add validations for Workout
+    #Note: Remove this if we want to add ability for user to create their own workout type.
+    @validates('type')
+    def validate_type(self, key, value):
+        types = ['Run', 'Bike', 'Swim', 'Weight Training', 'HIIT']
+        if value in types:
+            return value
+        else:
+            raise ValueError("Invalid Type")
+        
+    
 
 #JOIN TABLE 
 class Set_Workout(db.Model, SerializerMixin):
