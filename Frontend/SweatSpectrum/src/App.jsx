@@ -1,36 +1,51 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import Home from './components/home'
+import Nav from './components/Nav';
+
+
+import {
+  createBrowserRouter,
+  BrowserRouter,
+  RouterProvider,
+  Routes,
+  Route,
+  Router,
+  Link
+} from "react-router-dom";
+
+//NOTE: Will need this import for auto scrolling to top of page when clicking through routes
+// import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [count, setCount] = useState(0)
 
+
   return (
-    <>
-      <div>
-        <Home />
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      
+        <BrowserRouter>
+        <Nav/>
+        <Routes>
+          {/* <Route path="/" element={<Home />} />
+          <Route path="/community" element ={<CommunityPage/>} />
+          <Route path="/contact" element={<ContactPage/>} />
+          <Route path="/about" element={<AboutMe/>} /> */}
+        </Routes>
+        <Footer />
+        <ScrollToTop/>
+      </BrowserRouter>
+
+
+
+
+
+
+
+
+
+      
+    </div>
   )
 }
 
