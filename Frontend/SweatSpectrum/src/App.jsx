@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Dashboard from './components/dashboard';
 import StatsPro from './components/StatsPro';
 import Analytics from './components/Analytics';
+import NewWorkoutForm from './components/NewWorkoutForm';
 
 import {
   createBrowserRouter,
@@ -33,6 +34,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}/>
           <Route path="/statspro" element={<StatsPro />}/>
           <Route path="/analytics" element={<Analytics />}/>
+          <Route path="/new-workout" element={<NewWorkoutForm />}/>
         </Routes>
         {/* <Footer /> */}
         {/* <ScrollToTop/> */}
