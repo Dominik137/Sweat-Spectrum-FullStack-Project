@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Home from './components/Home';
 import Dashboard from './components/dashboard';
 import StatsPro from './components/StatsPro';
+import Analytics from './components/Analytics';
 
 import {
   createBrowserRouter,
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Home />}/>  
           <Route path="/dashboard" element={<Dashboard />}/>
           <Route path="/statspro" element={<StatsPro />}/>
+          <Route path="/analytics" element={<Analytics />}/>
         </Routes>
         {/* <Footer /> */}
         {/* <ScrollToTop/> */}
