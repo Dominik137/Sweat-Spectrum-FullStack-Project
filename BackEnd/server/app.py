@@ -24,8 +24,7 @@ def login():
         gotten_user = User.query.filter(User.user_name == data['user_name']).first()
         if gotten_user:
             if gotten_user.authenticate(data['password']):
-                if data['stay']:
-                    session["user"] = gotten_user.id
+                session["user"] = gotten_user.id
                 return gotten_user.to_dict(),200
             else:
                 return {"Error": "Not valid password"}, 400

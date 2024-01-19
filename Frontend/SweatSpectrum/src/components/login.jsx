@@ -4,7 +4,6 @@ function LogIn() {
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPasswrod] = useState('')
-  const [stay,setStay] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,8 +15,7 @@ function LogIn() {
         },
         body: JSON.stringify({
           user_name: username,
-          password: password,
-          stay: stay
+          password: password
         })
       })
         .then(r => {
@@ -42,7 +40,7 @@ function LogIn() {
       })
       .then(data => setUser(data));
   }, []);
-  
+
 function handleLogout(id){
   fetch('/api/logout', {
   method: "DELETE"})
