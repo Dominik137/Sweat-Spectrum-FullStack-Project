@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function LogIn() {
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPasswrod] = useState('')
+  const [stay,setStay] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    // Check if username is not empty before making the API call
     if (username !== "") {
       fetch('/api/login', {
         method: "POST",
@@ -16,7 +15,9 @@ function LogIn() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_name: username
+          user_name: username,
+          password: password,
+          stay: stay
         })
       })
         .then(r => {
@@ -30,11 +31,34 @@ function LogIn() {
     }
   }
 
+  useEffect(() => {
+    fetch('/api/session')
+      .then(r => {
+        if (r.ok) {
+          return r.json();
+        } else {
+          return null;
+        }
+      })
+      .then(data => setUser(data));
+  }, []);
+  
+function handleLogout(id){
+  fetch('/api/logout', {
+  method: "DELETE"})
+.then(r=>setUser(null))
+}
+// makes delete call to route logout which will perfrom the delete of user from session on backend 
+// then it will setUser to null on the front end
+
+
+
   return (
     <>
       {user ?
         <>
           <h2>Welcome, {user.user_name}!</h2>
+          <button onClick={handleLogout}>Logout</button>
         </>
         :
         <form onSubmit={handleSubmit}>
