@@ -14,10 +14,10 @@ class Set(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
     #Set user relationship
-    users = db.relationship('User', back_populates='Set')
+    users = db.relationship('User', back_populates='set')
 
     #Set set_workout relationship
-    Set_Workouts = db.relationship('Set_Workout', back_populates='Set')
+    Set_Workouts = db.relationship('Set_Workout', back_populates='set')
 
 
 class Workout(db.Model, SerializerMixin):
@@ -30,7 +30,7 @@ class Workout(db.Model, SerializerMixin):
     attributes = db.Column(db.String, nullable=False)
 
     #Set set_workout relationship
-    Set_Workouts = db.relationship('Set_Workout', back_populates='Workout')
+    Set_Workouts = db.relationship('Set_Workout', back_populates='workout')
 
     #Add validations for Workout
     #Note: Remove this if we want to add ability for user to create their own workout type.
@@ -65,6 +65,8 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String)
+
+    set  = db.relationship('Set', back_populates='users')
 
 
     @hybrid_property
