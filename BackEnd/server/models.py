@@ -14,7 +14,7 @@ class Set(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
     #Set user relationship
-    user = db.relationship('User', backpopulates='Sets')
+    users = db.relationship('User', back_populates='Set')
 
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='Set')
@@ -28,15 +28,19 @@ class Workout(db.Model, SerializerMixin):
     time = db.Column(db.String, nullable=False)
     attributes = db.Column(db.String, nullable=False)
 
+    #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='Workout')
 
 #JOIN TABLE 
 class Set_Workout(db.Model, SerializerMixin):
     __tablename__ = "Set_Workouts"
     id = db.Column(db.Integer, primary_key=True)
+
+    #Create Foreign Keys for set and workout 
     set_id = db.Column(db.Integer, db.ForeignKey('Sets.id'))
     workout_id = db.Column(db.Integer, db.ForeignKey('Workouts.id'))
 
+    #Set set_workout relationship
     set = db.relationship('Set', backpopulates='Set_Workouts')
     workout = db.relationship('Workout', backpopulates='Set_Workouts')
 
