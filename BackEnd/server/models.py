@@ -54,8 +54,8 @@ class Set_Workout(db.Model, SerializerMixin):
     workout_id = db.Column(db.Integer, db.ForeignKey('Workouts.id'))
 
     #Set set_workout relationship
-    set = db.relationship('Set', backpopulates='Set_Workouts')
-    workout = db.relationship('Workout', backpopulates='Set_Workouts')
+    set = db.relationship('Set', back_populates='Set_Workouts')
+    workout = db.relationship('Workout', back_populates='Set_Workouts')
 
 
 ##################################
