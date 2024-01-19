@@ -7,6 +7,7 @@ import Dashboard from './components/dashboard';
 import StatsPro from './components/StatsPro';
 import Analytics from './components/Analytics';
 import NewWorkoutForm from './components/NewWorkoutForm';
+import ScrollToTop from './components/ScrollToTop';
 
 import {
   createBrowserRouter,
@@ -18,8 +19,7 @@ import {
   Link
 } from "react-router-dom";
 
-//NOTE: Will need this import for auto scrolling to top of page when clicking through routes
-// import ScrollToTop from './components/ScrollToTop';
+
 
 function App() {
 
