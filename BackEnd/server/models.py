@@ -24,9 +24,9 @@ class Workout(db.Model, SerializerMixin):
     __tablename__ = "Workouts"
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String, nullable=False)
-    duration = db.Column(db.String, nullable=False)
-    date = db.Column(db.String, nullable=False)
-    time = db.Column(db.String, nullable=False)
+    duration = db.Column(db.Interval, nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
     attributes = db.Column(db.String, nullable=False)
 
     #Set set_workout relationship
@@ -42,7 +42,7 @@ class Workout(db.Model, SerializerMixin):
         else:
             raise ValueError("Invalid Type")
         
-    
+
 
 #JOIN TABLE 
 class Set_Workout(db.Model, SerializerMixin):
