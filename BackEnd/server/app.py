@@ -9,6 +9,7 @@ from flask_restful import Api, Resource
 from flask_cors import CORS
 from models import User, Workout, Set, Set_Workout
 from services import api, app, db, secret_key, bcrypt
+import json
 
 
 # Routes
@@ -72,8 +73,11 @@ def add_user():
 def get_all_workouts():
     if request.method == "GET":
         all_workouts = Workout.query.all()
-        workout_dicts = [workout.to_dict(rules = ('-Set_Workouts', '-set',)) for workout in all_workouts]
-        return make_response(workout_dicts, 200)
+        workout_dicts = []
+        for workout in all_workouts:
+            workout_dict = workout.to_dict()
+            workout_dicts.append(workout_dict)
+        return make_response(json.dumps(workout_dicts), 200)
         
 
 if __name__ == '__main__':

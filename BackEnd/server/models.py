@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from sqlalchemy import MetaData
 from sqlalchemy_serializer import SerializerMixin
+import datetime
 
 from sqlalchemy.ext.hybrid import hybrid_property
 from services import db, bcrypt
@@ -37,6 +38,19 @@ class Workout(db.Model, SerializerMixin):
 
     #Serialize Workout
     serialize_rules = ('-Set_Workouts.workout',)
+
+    #Copilot assistance for the below - need to deep dive
+
+    def to_dict(self):
+        data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        for key, value in data.items():
+            if isinstance(value, datetime.timedelta):
+                data[key] = str(value)
+            elif isinstance(value, datetime.date):
+                data[key] = value.isoformat()
+            elif isinstance(value, datetime.time):
+                data[key] = value.isoformat()
+        return data
 
     #Add validations for Workout
     #Note: Remove this if we want to add ability for user to create their own workout type.
