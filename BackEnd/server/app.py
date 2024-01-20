@@ -7,7 +7,7 @@ from flask import Flask, request, make_response, jsonify, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from flask_cors import CORS
-from models import User
+from models import User, Workout, Set, Set_Workout
 from services import api, app, db, secret_key, bcrypt
 
 
@@ -67,6 +67,14 @@ def add_user():
         except Exception as e:
             print(e)
             return make_response({"errors": ["validation errors"]}, 404)
+        
+@app.route('/all_workouts', methods=["GET"])
+def get_all_workouts():
+    if request.method == "GET":
+        all_workouts = Workout.query.all()
+        workout_dicts = [workout.to_dict() for workout in all_workouts]
+        return make_response(workout_dicts, 200)
+        
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
