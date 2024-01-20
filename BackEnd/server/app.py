@@ -75,9 +75,8 @@ def get_all_workouts():
         all_workouts = Workout.query.all()
         workout_dicts = []
         for workout in all_workouts:
-            workout_dict = workout.to_dict()
-            workout_dicts.append(workout_dict)
-        return make_response(json.dumps(workout_dicts), 200)
+            workout_dicts.append(workout.to_dict())
+        return make_response(workout_dicts, 200)
         
 
 if __name__ == '__main__':

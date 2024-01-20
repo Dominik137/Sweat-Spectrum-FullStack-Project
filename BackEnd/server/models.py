@@ -40,7 +40,7 @@ class Workout(db.Model, SerializerMixin):
     serialize_rules = ('-Set_Workouts.workout',)
 
     #Copilot assistance for the below - need to deep dive
-
+    #Basically what this is doing is taking the data from the database and converting it to strings since by default these date items cannot be serialized to JSON
     def to_dict(self):
         data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
         for key, value in data.items():
