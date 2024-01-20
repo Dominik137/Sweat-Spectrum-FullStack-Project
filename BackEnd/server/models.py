@@ -19,6 +19,9 @@ class Set(db.Model, SerializerMixin):
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='set')
 
+    #Serialize Set
+    serialize_rules = ('-Set_Workouts.set',)
+
 
 class Workout(db.Model, SerializerMixin):
     __tablename__ = "Workouts"
@@ -31,6 +34,9 @@ class Workout(db.Model, SerializerMixin):
 
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='workout')
+
+    #Serialize Workout
+    serialize_rules = ('-Set_Workouts.workout',)
 
     #Add validations for Workout
     #Note: Remove this if we want to add ability for user to create their own workout type.
@@ -56,6 +62,9 @@ class Set_Workout(db.Model, SerializerMixin):
     #Set set_workout relationship
     set = db.relationship('Set', back_populates='Set_Workouts')
     workout = db.relationship('Workout', back_populates='Set_Workouts')
+
+    #Serialize Set_Workout
+    serialize_rules = ('-set.Set_Workouts', '-workout.Set_Workouts')
 
 
 ##################################

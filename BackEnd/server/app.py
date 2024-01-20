@@ -72,7 +72,7 @@ def add_user():
 def get_all_workouts():
     if request.method == "GET":
         all_workouts = Workout.query.all()
-        workout_dicts = [workout.to_dict() for workout in all_workouts]
+        workout_dicts = [workout.to_dict(rules = ('-Set_Workouts', '-set',)) for workout in all_workouts]
         return make_response(workout_dicts, 200)
         
 
