@@ -100,19 +100,28 @@ def get_set_workout(id):
             return make_response({"error": "Not found"}, 404)
 
 #Creates a route for returning users workouts
-@app.route('/users/<int:user_id>/workouts', methods=["GET"])
+@app.route('/users/<int:user_id>/workouts', methods=["GET", "POST", "DELETE", "PATCH"])
 def get_user_workouts(user_id):
-    user_sets = Set.query.filter(Set.user_id == user_id).all()
+    if request.method == "GET":
+        user_sets = Set.query.filter(Set.user_id == user_id).all()
 
-    user_workouts = []
+        user_workouts = []
 
-    for set in user_sets:
-        set_workouts = Set_Workout.query.filter_by(set_id=set.id).all()
-        for set_workout in set_workouts:
-            workout_details = Workout.query.get(set_workout.workout_id)
-            user_workouts.append(workout_details.to_dict())
-        return make_response(jsonify(user_workouts), 200)
-        
+        for set in user_sets:
+            set_workouts = Set_Workout.query.filter_by(set_id=set.id).all()
+            for set_workout in set_workouts:
+                workout_details = Workout.query.get(set_workout.workout_id)
+                user_workouts.append(workout_details.to_dict())
+            return make_response(jsonify(user_workouts), 200)
+    elif request.method == "POST":
+        #Post request added here - adding a workout for a user
+        pass
+    elif request.method == "DELETE":
+        #Delete request added here - deleting a workout for a user
+        pass
+    elif request.method == "PATCH":
+        #Patch request added here - updating a workout for a user
+        pass
         
 
 if __name__ == '__main__':
