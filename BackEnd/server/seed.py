@@ -110,15 +110,22 @@ with app.app_context():
     Set_Workout.query.delete()
     print("Creating Set_Workouts")
 
+    #Barrets set workouts
+    #Day1
     new_set_workout_1 = Set_Workout(set_id=1, workout_id=1)
     new_set_workout_2 = Set_Workout(set_id=1, workout_id=2)
-    new_set_workout_3 = Set_Workout(set_id=1, workout_id=3)
-    new_set_workout_4 = Set_Workout(set_id=2, workout_id=4)
-    new_set_workout_5 = Set_Workout(set_id=2, workout_id=5)
-    new_set_workout_6 = Set_Workout(set_id=2, workout_id=6)
-    new_set_workout_7 = Set_Workout(set_id=3, workout_id=7)
-    new_set_workout_8 = Set_Workout(set_id=3, workout_id=8)
-    new_set_workout_9 = Set_Workout(set_id=3, workout_id=9)
+    #Day2
+    new_set_workout_3 = Set_Workout(set_id=2, workout_id=8)
+    new_set_workout_4 = Set_Workout(set_id=2, workout_id=9)
+
+    #Doms set workouts
+    new_set_workout_5 = Set_Workout(set_id=3, workout_id=4)
+    new_set_workout_6 = Set_Workout(set_id=3, workout_id=5)
+    new_set_workout_7 = Set_Workout(set_id=3, workout_id=6)
+
+    #Jacks set workouts
+    new_set_workout_8 = Set_Workout(set_id=4, workout_id=3)
+    new_set_workout_9 = Set_Workout(set_id=5, workout_id=7)
 
     set_workouts = [new_set_workout_1,new_set_workout_2,new_set_workout_3,new_set_workout_4,new_set_workout_5,new_set_workout_6,new_set_workout_7,new_set_workout_8,new_set_workout_9]
     db.session.add_all(set_workouts)

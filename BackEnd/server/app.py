@@ -99,7 +99,7 @@ def get_set_workout(id):
         else:
             return make_response({"error": "Not found"}, 404)
 
-#Creates a route for returning users workouts
+#Creates a route for returning ALL of a users workouts based on sets
 @app.route('/users/<int:user_id>/workouts', methods=["GET", "POST", "DELETE", "PATCH"])
 def get_user_workouts(user_id):
     if request.method == "GET":
@@ -112,7 +112,7 @@ def get_user_workouts(user_id):
             for set_workout in set_workouts:
                 workout_details = Workout.query.get(set_workout.workout_id)
                 user_workouts.append(workout_details.to_dict())
-            return make_response(jsonify(user_workouts), 200)
+        return make_response(jsonify(user_workouts), 200)
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
         pass
