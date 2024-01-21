@@ -111,7 +111,12 @@ def get_user_workouts(user_id):
             set_workouts = Set_Workout.query.filter_by(set_id=set.id).all()
             for set_workout in set_workouts:
                 workout_details = Workout.query.get(set_workout.workout_id)
-                user_workouts.append(workout_details.to_dict())
+                workout_dict = workout_details.to_dict()
+                # Convert the 'attributes' field from JSON string to dict using JSON loads
+                ###note to SELF!!!! --> the .replace("'", '"') is needed because the json.loads() method requires double quotes, but in the seed file I had single quotes for these attributes - consider fixing
+                workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
+                user_workouts.append(workout_dict)
+
         return make_response(jsonify(user_workouts), 200)
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
