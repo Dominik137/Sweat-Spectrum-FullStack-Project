@@ -35,19 +35,67 @@ with app.app_context():
 
     print("Creating Workouts")
     new_workout_1 = Workout(
-    type="Run",
-    duration=timedelta(minutes=30),  # Convert string "00:30:00" to a timedelta object
-    date=datetime.strptime("2020-01-01", "%Y-%m-%d").date(),  # Parse the date string
-    time=datetime.strptime("12:00:00", "%H:%M:%S").time(),  # Parse the time string
-    attributes="{'distance': '3.5', 'pace': '8:30'}")
-    new_workout_2 = Workout(type="Bike", duration=timedelta(minutes=32), date=datetime.strptime("2020-01-01", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '5.0', 'pace': '15.0'}")
-    new_workout_3 = Workout(type="Swim", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-01", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '1.0', 'pace': '1:30'}")
-    new_workout_4 = Workout(type="Run", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-02", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '3.5', 'pace': '8:30'}")
-    new_workout_5 = Workout(type="Bike", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-02", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '5.0', 'pace': '15.0'}")
-    new_workout_6 = Workout(type="Swim", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-02", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '1.0', 'pace': '1:30'}")
-    new_workout_7 = Workout(type="Run", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-03", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '3.5', 'pace': '8:30'}")
-    new_workout_8 = Workout(type="Bike", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-03", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '5.0', 'pace': '15.0'}")
-    new_workout_9 = Workout(type="Swim", duration=timedelta(minutes=30), date=datetime.strptime("2020-01-03", "%Y-%m-%d").date(), time=datetime.strptime("12:00:00", "%H:%M:%S").time(), attributes="{'distance': '1.0', 'pace': '1:30'}")
+        type="Run",
+        duration=timedelta(hours=1, minutes=46, seconds=18),  # Convert string "00:30:00" to a timedelta object
+        date=datetime.strptime("2024-01-02", "%Y-%m-%d").date(),  # Parse the date string
+        time=datetime.strptime("12:22:06", "%H:%M:%S").time(),  # Parse the time string
+        attributes="{'distance': '9.5', 'pace': '8:30', 'active calories': '500', 'total calories': '600', 'avg heart rate': '150', 'max heart rate': '175', 'elevation gain': '100', 'notes': 'felt good'}")
+
+    new_workout_2 = Workout(
+        type="Bike", 
+        duration=timedelta(hours=1, minutes=31, seconds=18), 
+        date=datetime.strptime("2024-01-02", "%Y-%m-%d").date(), 
+        time=datetime.strptime("15:20:19", "%H:%M:%S").time(), 
+        attributes="{'distance': '5.0', 'pace': '15.0', 'active calories': '750', 'total calories': '982', 'avg heart rate': '145', 'max heart rate': '182', 'elevation gain': '343', 'notes': 'really beautiful afternoon ride'}")
+
+    new_workout_3 = Workout(
+        type="Swim", 
+        duration=timedelta(minutes=45, seconds=12), 
+        date=datetime.strptime("2023-07-12", "%Y-%m-%d").date(), 
+        time=datetime.strptime("13:02:16", "%H:%M:%S").time(), 
+        attributes="{'type': 'indoor', 'stroke': 'backstroke', 'distance': '12.0', 'laps': '12', 'active calories': '300', 'total calories': '400', 'avg heart rate': '120', 'max heart rate': '150', 'notes': 'nice indoor swim'}")
+
+    new_workout_4 = Workout(
+        type="Weight Training", 
+        duration=timedelta(minutes=8, seconds=14), 
+        date=datetime.strptime("2024-01-03", "%Y-%m-%d").date(), 
+        time=datetime.strptime("12:45:00", "%H:%M:%S").time(), 
+        attributes="{'muscle group': 'biceps', 'type': 'curls', 'weight': '20', 'reps': '10', 'sets': '3', 'active calories': '50', 'total calories': '60', 'avg heart rate': '100', 'max heart rate': '120', 'notes': 'PUMP!!'}")
+
+    new_workout_5 = Workout(
+        type="Weight Training", 
+        duration=timedelta(minutes=12, seconds=59), 
+        date=datetime.strptime("2024-01-03", "%Y-%m-%d").date(), 
+        time=datetime.strptime("12:55:00", "%H:%M:%S").time(), 
+        attributes="{'muscle group': 'quads', 'type': 'seated leg press', 'weight': '95', 'reps': '12', 'sets': '3', 'active calories': '80', 'total calories': '100', 'avg heart rate': '100', 'max heart rate': '120', 'notes': 'leg day!'}")
+
+    new_workout_6 = Workout(
+        type="Weight Training", 
+        duration=timedelta(minutes=15, seconds=10), 
+        date=datetime.strptime("2024-01-03", "%Y-%m-%d").date(), 
+        time=datetime.strptime("13:15:00", "%H:%M:%S").time(), 
+        attributes="{'muscle group': 'upper body', 'type': 'bench press', 'weight': '200', 'reps': '5', 'sets': '4', 'active calories': '120', 'total calories': '150', 'avg heart rate': '110', 'max heart rate': '150', 'notes': 'get shredded'}")
+
+    new_workout_7 = Workout(
+        type="HIIT", 
+        duration=timedelta(minutes=20, seconds=15), 
+        date=datetime.strptime("2020-01-04", "%Y-%m-%d").date(), 
+        time=datetime.strptime("07:02:14", "%H:%M:%S").time(), 
+        attributes="{'intensity': 'high', 'rounds': '4', 'warm up': 'jog', 'cool down': 'stretch', 'muscle group': 'legs', 'active calories': '340', 'total calories': '420', 'notes': 'im dead'}")
+
+    new_workout_8 = Workout(
+        type="Run",
+        duration=timedelta(hours=0, minutes=46, seconds=22),  # Convert string "00:30:00" to a timedelta object
+        date=datetime.strptime("2024-01-12", "%Y-%m-%d").date(),  # Parse the date string
+        time=datetime.strptime("12:30:16", "%H:%M:%S").time(),  # Parse the time string
+        attributes="{'distance': '3.5', 'pace': '9:30', 'active calories': '280', 'total calories': '310', 'avg heart rate': '150', 'max heart rate': '175', 'elevation gain': '100', 'notes': 'good short run'}")
+
+    new_workout_9 = Workout(
+        type="Bike", 
+        duration=timedelta(hours=1, minutes=58, seconds=18), 
+        date=datetime.strptime("2024-01-13", "%Y-%m-%d").date(), 
+        time=datetime.strptime("16:15:49", "%H:%M:%S").time(), 
+        attributes="{'distance': '15.0', 'pace': '15.0', 'active calories': '950', 'total calories': '1115', 'avg heart rate': '145', 'max heart rate': '184', 'elevation gain': '343', 'notes': 'beat my last duration record!'}")
 
 
     workouts = [new_workout_1,new_workout_2,new_workout_3,new_workout_4,new_workout_5,new_workout_6,new_workout_7,new_workout_8,new_workout_9]
