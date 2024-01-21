@@ -80,6 +80,17 @@ class Set_Workout(db.Model, SerializerMixin):
     #Serialize Set_Workout
     serialize_rules = ('-set.Set_Workouts', '-workout.Set_Workouts')
 
+    def to_dict(self):
+        data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        for key, value in data.items():
+            if isinstance(value, datetime.timedelta):
+                data[key] = str(value)
+            elif isinstance(value, datetime.date):
+                data[key] = value.isoformat()
+            elif isinstance(value, datetime.time):
+                data[key] = value.isoformat()
+        return data
+
 
 ##################################
 

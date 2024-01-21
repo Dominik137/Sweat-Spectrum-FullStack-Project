@@ -68,7 +68,8 @@ def add_user():
         except Exception as e:
             print(e)
             return make_response({"errors": ["validation errors"]}, 404)
-        
+
+#Creates a route to get all the workouts
 @app.route('/all_workouts', methods=["GET"])
 def get_all_workouts():
     if request.method == "GET":
@@ -77,6 +78,28 @@ def get_all_workouts():
         for workout in all_workouts:
             workout_dicts.append(workout.to_dict())
         return make_response(workout_dicts, 200)
+
+#Creates a route to get all the set workouts
+@app.route('/set_workouts', methods=["GET"])
+def get_set_workouts():
+    if request.method == "GET":
+        all_set_workouts = Set_Workout.query.all()
+        set_workout_dicts = []
+        for set_workout in all_set_workouts:
+            set_workout_dicts.append(set_workout.to_dict())
+        return make_response(set_workout_dicts, 200)
+
+#Creates a route to return set workouts by ID
+@app.route('/set_workouts/<int:id>', methods=["GET"])
+def get_set_workout(id):
+    if request.method == "GET":
+        set_workout = Set_Workout.query.filter(Set_Workout.id == id).first()
+        if set_workout:
+            return set_workout.to_dict(), 200
+        else:
+            return make_response({"error": "Not found"}, 404)
+
+        
         
 
 if __name__ == '__main__':
