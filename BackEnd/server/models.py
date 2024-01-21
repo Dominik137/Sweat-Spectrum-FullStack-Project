@@ -67,7 +67,7 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
 
     set  = db.relationship('Set', back_populates='users')
-
+    
 
     @hybrid_property
     def password(self):

@@ -85,6 +85,7 @@ function handleLogout(id){
 
   return (
     <>
+      <div className="grid">
       {user ?
         <>
           <h2>Welcome, {user.username}!</h2>
@@ -92,7 +93,7 @@ function handleLogout(id){
         </>
         :
         <>
-          <div>
+          <div >
               <h1>
                 Create User!
               </h1>
@@ -110,7 +111,10 @@ function handleLogout(id){
               <button type="submit">Create User</button>
             </form>
           </div>
-          <br></br>
+          <div>
+          <h1>
+                Log In!
+              </h1>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -124,8 +128,10 @@ function handleLogout(id){
           />
           <button type="submit">Login</button>
         </form>
+        </div>
         </>
       }
+      </div>
     </>
   );
 }

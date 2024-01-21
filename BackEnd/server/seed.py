@@ -8,7 +8,7 @@ with app.app_context():
 
     print("Creating Users")
     
-    new_user_1 = User(username="Dom", password = "ZEZE")
+    new_user_1 = User(username="Dom", password = "1231")
     new_user_2 = User(username="Jack", password = "password")
     new_user_3 = User(username="Barrett", password = "password")
     users = [new_user_1,new_user_2,new_user_3]

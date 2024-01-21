@@ -4,7 +4,8 @@ import WorkoutList from "./DashWorkouts"
 function Dashboard(){
     return(
         //Full dashboard page that contains the high level stats, individual workouts for a single user, and an "Add Workout" button.
-        <div>
+        <div className="grid">
+        <div className="">
             <h1>Dashboard</h1>
             <DashStats />
             <p>StatsPro</p>
@@ -15,6 +16,7 @@ function Dashboard(){
                 <button>+</button>
             </div>
             <WorkoutList />
+        </div>
         </div>
     )
 }
