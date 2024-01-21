@@ -20,13 +20,15 @@ with app.app_context():
     Set.query.delete()
 
     print("Creating Sets")
-    new_set_1 = Set(user_id=1)
-    new_set_2 = Set(user_id=2)
-    new_set_3 = Set(user_id=1) 
+    #Barretts sets - running and biking
+    new_set_1 = Set(user_id=3)
+    new_set_2 = Set(user_id=3)
+    #Doms sets - Weight training
+    new_set_3 = Set(user_id=1)
+    #Jacks sets - HIIT set and Swim Set (separate days) 
     new_set_4 = Set(user_id=2)
-    new_set_5 = Set(user_id=3)
-    new_set_6 = Set(user_id=3)
-    db.session.add_all([new_set_1,new_set_2,new_set_3,new_set_4,new_set_5,new_set_6])
+    new_set_5 = Set(user_id=2)
+    db.session.add_all([new_set_1,new_set_2,new_set_3,new_set_4])
     db.session.commit()
     print("Sets Created")
 
