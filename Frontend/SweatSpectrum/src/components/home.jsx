@@ -1,6 +1,6 @@
 import LogIn from "./login";
 
-function Home(){
+function Home({setUser, user}){
     return (
         // Initial landing page that contains the login form, create account form, and can be accessed by anyone.
         
@@ -12,7 +12,7 @@ function Home(){
             <div>
                 <div className="login-create-container">
                 <div className="login-module">
-                    <LogIn/>
+                    <LogIn setUser={setUser} user={user}/>
                 </div>
                 <div className="create-module">
                    

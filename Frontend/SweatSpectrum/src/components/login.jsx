@@ -1,11 +1,13 @@
+import { data } from "autoprefixer";
 import { useState, useEffect } from "react";
+import Dashboard from "./dashboard";
 
-function LogIn() {
-  const [user, setUser] = useState(null);
+function LogIn({user, setUser}) {
   const [createUsername, setCreateUsername] = useState("");
   const [createPassword, setCreatePassword] = useState('');
   const [logInStatus, setLoginStatus] = useState('')
   const [usernameStatus, setUsernameStatus] = useState('')
+ 
 
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState('');
@@ -31,14 +33,15 @@ function LogIn() {
              
           }
         })
-        .then(data => setUser(data));
+        .then(data => setUser(data))
     // Clear form inputs after submission
     setLoginUsername("");
     setLoginPassword("");
     setLoginStatus("");
+    
     }
   }
-
+  
   function handleCreateUser(e){
     e.preventDefault()
     console.log("Submitting user creation:", createUsername, createPassword);
@@ -66,17 +69,7 @@ function LogIn() {
       setUsernameStatus('')
   }
 
-  useEffect(() => {
-    fetch('/api/session')
-      .then(r => {
-        if (r.ok) {
-          return r.json();
-        } else {
-          return null;
-        }
-      })
-      .then(data => setUser(data));
-  }, []);
+  
 
 function handleLogout(id){
   fetch('/api/logout', {
@@ -85,7 +78,6 @@ function handleLogout(id){
 }
 // makes delete call to route logout which will perfrom the delete of user from session on backend 
 // then it will setUser to null on the front end
-
 
 
   return (

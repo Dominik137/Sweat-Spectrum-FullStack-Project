@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 
 import './App.css'
 import Nav from './components/Nav';
@@ -23,6 +23,24 @@ import {
 
 function App() {
 
+  const [user, setUser] = useState(null);
+  // console.log(user)
+
+  useEffect(() => {
+    fetch('/api/session')
+      .then(r => {
+        if (r.ok) {
+          return r.json();
+        } else {
+          return null;
+        }
+      })
+      .then(data => {setUser(data)
+      });
+  }, []);
+
+
+
 
   return (
     <div>
@@ -30,8 +48,8 @@ function App() {
         <BrowserRouter>
         <Nav/>
         <Routes>
-          <Route path="/" element={<Home />}/>  
-          <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/" element={<Home user={user} setUser={setUser}/>}/>  
+          <Route path="/dashboard" element={<Dashboard user={user}/>}/>
           <Route path="/statspro" element={<StatsPro />}/>
           <Route path="/analytics" element={<Analytics />}/>
           <Route path="/new-workout" element={<NewWorkoutForm />}/>

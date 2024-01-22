@@ -1,43 +1,38 @@
-import WorkoutPost from "./WorkoutPost"
+import { data } from "autoprefixer"
+import WorkoutPost from "./WorkoutPost";
+import { useEffect, useState } from "react";
 
-function WorkoutList({workouts}){
-   
-    const displayWorkouts = workouts.map((workout)=>{
-        return(
-            <WorkoutPost key ={workout.id} workout={workout}/>
-        )
-    })
-   
-    return(
-        //List of workouts on the dashboard goes here - for a single user only.
+function WorkoutList({ user }) {
+  const [workouts, setWorkouts] = useState([]);
 
-        
-        // <>
-        // <hr/>
-        // <div className="master-workout-table">
-        //     <div className="single-workout-row">
-        //         <h2>Run</h2>
-        //         <h4>Jan 19th (user.workout.date) 2:00pm (user.workout.time)</h4>
-        //         <p>run.attr.jsonify attr NAME  |  run.attr.jsonify attr DATA</p>
-        //         <p>run.attr.jsonify attr NAME  |  run.attr.jsonify attr DATA</p>
-        //         <p>run.attr.jsonify attr NAME  |  run.attr.jsonify attr DATA</p>
-        //         <p>run.attr.jsonify attr NAME  |  run.attr.jsonify attr DATA</p>
-        //     </div>
+  useEffect(() => {
+    const getUserSets = () => {
+      fetch(`/api/users/${user?.id}/workouts`, {
+        method: 'GET'
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          setWorkouts(data);
+        })
+        .catch(error => {
+          console.error('Error fetching workouts:', error);
+        });
+    };
 
-        //     <div className="single-workout-row">
-        //         <h2>Strength Training</h2>
-        //         <h4>Jan 17th (user.workout.date) 1:00pm (user.workout.time)</h4>
-        //         <p>strength.attr.jsonify attr NAME  |  strength.attr.jsonify attr DATA</p>
-        //         <p>strength.attr.jsonify attr NAME  |  strength.attr.jsonify attr DATA</p>
-        //         <p>strength.attr.jsonify attr NAME  |  strength.attr.jsonify attr DATA</p>
-        //         <p>strength.attr.jsonify attr NAME  |  strength.attr.jsonify attr DATA</p>
-        //     </div>
-        // </div>
-        // </>
-        <div>
-        {displayWorkouts}
-        </div>
-    );
+    getUserSets();
+  }, [user]);
+
+  
+//   mpa thorugh this
+
+  return (
+    <>
+      <div>
+       <h2>{workouts.id}</h2>
+      </div>
+    </>
+  );
 }
 
 export default WorkoutList;
