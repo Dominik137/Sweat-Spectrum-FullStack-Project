@@ -86,7 +86,7 @@ function handleLogout(id){
       {user ?
         <>
           <h2>Welcome, {user.username}!</h2>
-          <button onClick={handleLogout}>Logout</button>
+          <button role="button" class="contrast" onClick={handleLogout}>Logout</button>
         </>
         :
         <>
@@ -105,7 +105,7 @@ function handleLogout(id){
                 value={createPassword}
                 onChange={(e) => setCreatePassword(e.target.value)}
               />
-              <button type="submit" className="btn-green">Create User</button>
+              <button role="button" class="contrast" type="submit" className="btn-green">Create User</button>
               <h3>{usernameStatus}</h3>
             </form>
           </div>
@@ -124,7 +124,7 @@ function handleLogout(id){
             value={loginPassword}
             onChange={(e) => setLoginPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button role="button" class="contrast" type="submit">Login</button>
           <h3>{logInStatus}</h3>
         </form>
         </div>

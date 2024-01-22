@@ -2,7 +2,7 @@ import { useState , useEffect} from 'react'
 
 import './App.css'
 import Nav from './components/Nav';
-import Home from './components/Home';
+import Home from './components/home'
 import Dashboard from './components/dashboard';
 import StatsPro from './components/StatsPro';
 import Analytics from './components/Analytics';

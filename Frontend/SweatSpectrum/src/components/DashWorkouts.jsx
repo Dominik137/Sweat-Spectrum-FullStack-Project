@@ -24,15 +24,24 @@ function WorkoutList({ user }) {
   }, [user]);
 
   
-//   mpa thorugh this
 
   return (
-    <>
-      <div>
-       <h2>{workouts.id}</h2>
+    <div>
+    {workouts?.map(set => (
+      <div key={set.id}>
+        <h2>"Set Name"{set.id}</h2>
+        <button role="button" class="contrast" style={{ width: '20%' }}>Add New wrokout</button>
+        <ul>
+          {set.map(workout => (
+            <WorkoutPost key={workout.id} workout={workout} />
+          ))}
+        </ul>
+        
       </div>
-    </>
-  );
+    ))}
+  </div>
+);
 }
+
 
 export default WorkoutList;

@@ -106,19 +106,20 @@ def get_user_workouts(user_id):
     if request.method == "GET":
         user_sets = Set.query.filter(Set.user_id == user_id).all()
 
-        user_workouts = {}
+        user_workouts_list = []
 
         for set in user_sets:
             set_workouts = Set_Workout.query.filter_by(set_id=set.id).all()
             workouts_for_set = []
+
             for set_workout in set_workouts:
                 workout_details = Workout.query.get(set_workout.workout_id)
                 workout_dict = workout_details.to_dict()
                 workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
                 workouts_for_set.append(workout_dict)
-            user_workouts[set.id] = workouts_for_set
-
-        return make_response(jsonify(user_workouts), 200)
+            user_workouts_list.append(workouts_for_set)
+        
+        return make_response(jsonify(user_workouts_list), 200)
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
         pass
