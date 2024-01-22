@@ -116,7 +116,6 @@ def get_user_workouts(user_id):
                 ###note to SELF!!!! --> the .replace("'", '"') is needed because the json.loads() method requires double quotes, but in the seed file I had single quotes for these attributes - consider fixing
                 workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
                 user_workouts.append(workout_dict)
-
         return make_response(jsonify(user_workouts), 200)
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
