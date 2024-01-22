@@ -39,7 +39,7 @@ class Workout(db.Model, SerializerMixin):
     __tablename__ = "Workouts"
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String, nullable=False)
-    duration = db.Column(db.Interval, nullable=False)
+    duration = db.Column(db.String, nullable=False)
     date = db.Column(db.Date, nullable=False)
     time = db.Column(db.Time, nullable=False)
     attributes = db.Column(db.String, nullable=False)
@@ -55,13 +55,23 @@ class Workout(db.Model, SerializerMixin):
     def to_dict(self):
         data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
         for key, value in data.items():
-            if isinstance(value, datetime.timedelta):
-                data[key] = str(value)
-            elif isinstance(value, datetime.date):
+            # if isinstance(value, datetime.timedelta):
+            #     data[key] = str(value)
+            if isinstance(value, datetime.date):
                 data[key] = value.isoformat()
             elif isinstance(value, datetime.time):
                 data[key] = value.isoformat()
         return data
+    
+    # def serialize(self):
+    #     return {
+    #         'id': self.id,
+    #         'type': self.type,
+    #         'duration': self.duration,
+    #         'date': self.date.isoformat(),
+    #         'time': self.time.isoformat(),
+    #         'attributes': self.attributes
+    #     }
 
     #Add validations for Workout
     #Note: Remove this if we want to add ability for user to create their own workout type.
@@ -112,6 +122,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
 
     set  = db.relationship('Set', back_populates='users')
+
+    serialize_rules = ('-set',)
     
     serialize_rules = ('-set',)
 
@@ -130,3 +142,4 @@ class User(db.Model, SerializerMixin):
     # bcrypt.check_password_hash(_password_hash, password.encode('utf-8'))
     def authenticate(self,password):
         return bcrypt.check_password_hash(self._password_hash,password.encode('utf-8'))
+    
