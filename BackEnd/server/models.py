@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from sqlalchemy import MetaData
 from sqlalchemy_serializer import SerializerMixin
+import datetime
 
 from sqlalchemy.ext.hybrid import hybrid_property
 from services import db, bcrypt
@@ -19,6 +20,9 @@ class Set(db.Model, SerializerMixin):
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='set')
 
+    #Serialize Set
+    serialize_rules = ('-Set_Workouts.set',)
+
 
 class Workout(db.Model, SerializerMixin):
     __tablename__ = "Workouts"
@@ -31,6 +35,22 @@ class Workout(db.Model, SerializerMixin):
 
     #Set set_workout relationship
     Set_Workouts = db.relationship('Set_Workout', back_populates='workout')
+
+    #Serialize Workout
+    serialize_rules = ('-Set_Workouts.workout',)
+
+    #Copilot assistance for the below - need to deep dive
+    #Basically what this is doing is taking the data from the database and converting it to strings since by default these date items cannot be serialized to JSON
+    def to_dict(self):
+        data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        for key, value in data.items():
+            if isinstance(value, datetime.timedelta):
+                data[key] = str(value)
+            elif isinstance(value, datetime.date):
+                data[key] = value.isoformat()
+            elif isinstance(value, datetime.time):
+                data[key] = value.isoformat()
+        return data
 
     #Add validations for Workout
     #Note: Remove this if we want to add ability for user to create their own workout type.
@@ -56,6 +76,20 @@ class Set_Workout(db.Model, SerializerMixin):
     #Set set_workout relationship
     set = db.relationship('Set', back_populates='Set_Workouts')
     workout = db.relationship('Workout', back_populates='Set_Workouts')
+
+    #Serialize Set_Workout
+    serialize_rules = ('-set.Set_Workouts', '-workout.Set_Workouts',)
+
+    def to_dict(self):
+        data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        for key, value in data.items():
+            if isinstance(value, datetime.timedelta):
+                data[key] = str(value)
+            elif isinstance(value, datetime.date):
+                data[key] = value.isoformat()
+            elif isinstance(value, datetime.time):
+                data[key] = value.isoformat()
+        return data
 
 
 ##################################
