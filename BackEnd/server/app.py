@@ -100,22 +100,24 @@ def get_set_workout(id):
             return make_response({"error": "Not found"}, 404)
 
 #Creates a route for returning ALL of a users workouts based on sets
+
 @app.route('/users/<int:user_id>/workouts', methods=["GET", "POST", "DELETE", "PATCH"])
 def get_user_workouts(user_id):
     if request.method == "GET":
         user_sets = Set.query.filter(Set.user_id == user_id).all()
 
-        user_workouts = []
+        user_workouts = {}
 
         for set in user_sets:
             set_workouts = Set_Workout.query.filter_by(set_id=set.id).all()
+            workouts_for_set = []
             for set_workout in set_workouts:
                 workout_details = Workout.query.get(set_workout.workout_id)
                 workout_dict = workout_details.to_dict()
-                # Convert the 'attributes' field from JSON string to dict using JSON loads
-                ###note to SELF!!!! --> the .replace("'", '"') is needed because the json.loads() method requires double quotes, but in the seed file I had single quotes for these attributes - consider fixing
                 workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
-                user_workouts.append(workout_dict)
+                workouts_for_set.append(workout_dict)
+            user_workouts[set.id] = workouts_for_set
+
         return make_response(jsonify(user_workouts), 200)
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
@@ -127,6 +129,14 @@ def get_user_workouts(user_id):
         #Patch request added here - updating a workout for a user
         pass
         
+@app.route('/all_sets', methods=["GET"])
+def get_all_sets():
+    if request.method == "GET":
+        all_sets = Set.query.all()
+        set_dicts = []
+        for set in all_sets:
+            set_dicts.append(set.to_dict())
+        return make_response(set_dicts, 200)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
