@@ -102,6 +102,7 @@ class User(db.Model, SerializerMixin):
 
     set  = db.relationship('Set', back_populates='users')
     
+    serialize_rules = ('-set',)
 
     @hybrid_property
     def password(self):
