@@ -108,7 +108,7 @@ function handleLogout(id){
                 value={createPassword}
                 onChange={(e) => setCreatePassword(e.target.value)}
               />
-              <button type="submit">Create User</button>
+              <button type="submit" className="btn-green">Create User</button>
             </form>
           </div>
           <div>
