@@ -62,7 +62,7 @@ def add_user():
             db.session.add(new_user)
             db.session.commit()
             session["user"] = new_user.id 
-            # After the user is created and submitted to the data base we have the set the session to that new useres id
+            # After the user is created and submitted to the data base we have the set the session to that new users id
             # so that when they create there account it wont automaticly log them out
         # this adds it to our table
             return new_user.to_dict(),201
@@ -70,7 +70,7 @@ def add_user():
             print(e)
             return make_response({"errors": ["validation errors"]}, 404)
 
-#Creates a route to get all the workouts, or post a new individual workout
+# Creates a route to get all the workouts, or post a new individual workout
 @app.route('/all_workouts', methods=["GET", "POST"])
 def get_all_workouts():
     if request.method == "GET":
@@ -80,7 +80,7 @@ def get_all_workouts():
             workout_dicts.append(workout.to_dict())
         return make_response(workout_dicts, 200)
 
-#Creates a route to get all the set workouts
+# Creates a route to get all the set workouts
 @app.route('/set_workouts', methods=["GET"])
 def get_set_workouts():
     if request.method == "GET":
@@ -90,7 +90,7 @@ def get_set_workouts():
             set_workout_dicts.append(set_workout.to_dict())
         return make_response(set_workout_dicts, 200)
 
-#Creates a route to return set workouts by ID
+# Creates a route to return set workouts by ID
 @app.route('/set_workouts/<int:id>', methods=["GET"])
 def get_set_workout(id):
     if request.method == "GET":
@@ -100,7 +100,8 @@ def get_set_workout(id):
         else:
             return make_response({"error": "Not found"}, 404)
 
-#Creates a route for returning ALL of a users workouts based on sets – MAIN DASHBOARD VIEW FOR A USER
+# Creates a route for returning ALL of a users workouts based on sets
+# MAIN DASHBOARD VIEW FOR A USER
 @app.route('/users/<int:user_id>/workouts', methods=["GET", "POST", "DELETE", "PATCH"])
 def get_user_workouts(user_id):
     if request.method == "GET":
@@ -139,14 +140,47 @@ def get_user_workouts(user_id):
     elif request.method == "PATCH":
         #Patch request added here - updating a workout for a user
         pass
+
+# Creates a route for deleting a single workout by ID 
+# MAIN WORKOUT EDIT FUNCTIONALITY FOR USER
+@app.route('/users/<int:user_id>/workouts/<int:workout_id>', methods=["DELETE", "PATCH"])
+def modify_user_workout(user_id, workout_id):
+    # Delete a single workout by ID
+    if request.method == "DELETE":
+        workout_to_delete = Workout.query.get(workout_id)
+        if workout_to_delete:
+            db.session.delete(workout_to_delete)
+            db.session.commit()
+            return make_response({"success": "Workout deleted"}, 204)
+        else:
+            return make_response({"error": "Not found"}, 404)
+    # Update a single workout by ID
+    elif request.method == "PATCH":
+        single_workout = Workout.query.filter(Workout.id == workout_id).first()
+        if single_workout:
+            try:
+                data = request.get_json()
+                for attr in data:
+                    # Convert date and time strings to date and time objects
+                    if attr == 'date':
+                        data[attr] = datetime.strptime(data[attr], '%Y-%m-%d').date()
+                    elif attr == 'time':
+                        data[attr] = datetime.strptime(data[attr], '%H:%M:%S').time()
+                    setattr(single_workout, attr, data[attr])
+                db.session.add(single_workout)
+                db.session.commit()
+                return make_response(single_workout.to_dict(), 202)
+            except Exception as e:
+                return make_response({"errors": [str(e)]}, 404)
+        else:
+            return make_response({"error": "Workout not found"}, 404)
     
-#Creating a new route for: checks if there's a curent set id - if not (read as zer0), create a new one.
-@app.route('/new_workout/<int:user_id>/<int:set_id>', methods=["GET", "POST"])
+# Creates a route for adding a new workout for a user to a set, either an existing one or creating a new one.
+@app.route('/new_workout/<int:user_id>/<int:set_id>', methods=["POST"])
 def create_user_workout(user_id, set_id):
-    if request.method == "GET":
-        pass
-    elif request.method == "POST":
-        #This line basically says: if the set ID is 0... [then create a new set and add the workout to that set]
+
+    if request.method == "POST":
+        # set_id == 0 checks if a current set_id exists. If not, a new one is created.
         if set_id == 0:
             try:
                 data = request.get_json()
@@ -174,7 +208,7 @@ def create_user_workout(user_id, set_id):
                 return jsonify(workout.to_dict()), 201
             except Exception as e:
                 return make_response({"errors": [str(e)]}, 404)
-        #This line basically says: if the set ID already exists aka is greater than 0... [then add the workout to that set]
+        # set_id > 0 checks if a current set_id exists. If so, the workout is added to that existing set.
         elif set_id > 0:
             try:
                 data = request.get_json()
@@ -199,7 +233,6 @@ def create_user_workout(user_id, set_id):
                 return jsonify(workout.to_dict()), 201
             except Exception as e:
                 return make_response({"errors": [str(e)]}, 404)
-        
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
