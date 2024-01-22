@@ -4,6 +4,8 @@ function LogIn() {
   const [user, setUser] = useState(null);
   const [createUsername, setCreateUsername] = useState("");
   const [createPassword, setCreatePassword] = useState('');
+  const [logInStatus, setLoginStatus] = useState('')
+  const [usernameStatus, setUsernameStatus] = useState('')
 
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState('');
@@ -24,14 +26,16 @@ function LogIn() {
         .then(r => {
           if (r.ok) {
             return r.json();
-          } else {
-            return null;
+            
+          } else {setLoginStatus('Username or password was incorrect')
+             
           }
         })
         .then(data => setUser(data));
     // Clear form inputs after submission
     setLoginUsername("");
     setLoginPassword("");
+    setLoginStatus("");
     }
   }
 
@@ -52,13 +56,14 @@ function LogIn() {
         if (r.ok) {
           return r.json();
         } else {
-          return null;
+          setUsernameStatus('Invalid username or password');
         }
       })
       .then(data => setUser(data));
       // Clear form inputs after submission
       setCreateUsername("");
       setCreatePassword("");
+      setUsernameStatus('')
   }
 
   useEffect(() => {
@@ -109,6 +114,7 @@ function handleLogout(id){
                 onChange={(e) => setCreatePassword(e.target.value)}
               />
               <button type="submit" className="btn-green">Create User</button>
+              <h3>{usernameStatus}</h3>
             </form>
           </div>
           <div>
@@ -127,6 +133,7 @@ function handleLogout(id){
             onChange={(e) => setLoginPassword(e.target.value)}
           />
           <button type="submit">Login</button>
+          <h3>{logInStatus}</h3>
         </form>
         </div>
         </>
