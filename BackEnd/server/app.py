@@ -10,6 +10,7 @@ from flask_cors import CORS
 from models import User, Workout, Set, Set_Workout
 from services import api, app, db, secret_key, bcrypt
 import json
+from datetime import datetime
 
 
 # Routes
@@ -69,8 +70,8 @@ def add_user():
             print(e)
             return make_response({"errors": ["validation errors"]}, 404)
 
-#Creates a route to get all the workouts
-@app.route('/all_workouts', methods=["GET"])
+#Creates a route to get all the workouts, or post a new individual workout
+@app.route('/all_workouts', methods=["GET", "POST"])
 def get_all_workouts():
     if request.method == "GET":
         all_workouts = Workout.query.all()
@@ -78,6 +79,22 @@ def get_all_workouts():
         for workout in all_workouts:
             workout_dicts.append(workout.to_dict())
         return make_response(workout_dicts, 200)
+    # elif request.method == "POST":
+    #     #Post request added here - adding a workout for a user
+    #     try:
+    #         data = request.get_json()
+    #         workout = Workout(
+    #             type=data['type'],
+    #             duration=data['duration'],
+    #             date=datetime.strptime(data['date'], '%Y-%m-%d').date(),
+    #             time=datetime.strptime(data['time'], '%H:%M:%S').time(),
+    #             attributes=data['attributes']
+    #             )
+    #         db.session.add(workout)
+    #         db.session.commit()
+    #         return jsonify(workout.to_dict()), 201
+    #     except Exception as e:
+    #         return make_response({"errors": [str(e)]}, 404)
 
 #Creates a route to get all the set workouts
 @app.route('/set_workouts', methods=["GET"])
@@ -121,7 +138,29 @@ def get_user_workouts(user_id):
         return make_response(jsonify(user_workouts), 200)
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
-        pass
+        try:
+            data = request.get_json()
+            workout = Workout(
+                type=data['type'],
+                duration=data['duration'],
+                date=datetime.strptime(data['date'], '%Y-%m-%d').date(),
+                time=datetime.strptime(data['time'], '%H:%M:%S').time(),
+                attributes=data['attributes']
+                )
+            db.session.add(workout)
+            db.session.commit()
+            return jsonify(workout.to_dict()), 201
+        except Exception as e:
+            return make_response({"errors": [str(e)]}, 404)
+            # new_set_workout = Set_Workout(
+            #     set_id = json_dict.get("set_id"),
+            #     workout_id = new_workout.id
+            # )
+            # db.session.add(new_set_workout)
+            # db.session.commit()
+            # return new_workout.to_dict(),201
+        # except:
+        #     return make_response({"errors": ["validation errors"]}, 404)
     elif request.method == "DELETE":
         #Delete request added here - deleting a workout for a user
         pass
