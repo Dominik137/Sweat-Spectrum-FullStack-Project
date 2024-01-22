@@ -112,6 +112,8 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
 
     set  = db.relationship('Set', back_populates='users')
+
+    serialize_rules = ('-set',)
     
 
     @hybrid_property
@@ -129,3 +131,4 @@ class User(db.Model, SerializerMixin):
     # bcrypt.check_password_hash(_password_hash, password.encode('utf-8'))
     def authenticate(self,password):
         return bcrypt.check_password_hash(self._password_hash,password.encode('utf-8'))
+    
