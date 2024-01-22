@@ -2,34 +2,39 @@ import DashStats from "./DashStats"
 import WorkoutList from "./DashWorkouts"
 import {useState, useEffect} from "react"
 
-function Dashboard(){
 
-    const [workouts, setWorkouts] = useState([])
+function Dashboard({user}){
+   
+   
+   
 
-    useEffect(()=>{
-        fetch("/api/all_workouts")
-        .then(r=>r.json())
-        .then(data=>setWorkouts(data))
-        }
-      ,[])
 
     return(
         //Full dashboard page that contains the high level stats, individual workouts for a single user, and an "Add Workout" button.
         <div className="grid">
-        <div className="">
-            <h1>Dashboard</h1>
-            <DashStats />
-            <p>StatsPro</p>
-            <p>Logout</p>
-            <hr/>
             <div>
-                <p>Add a new workout</p>
-                <button>+</button>
-            </div>
-            <WorkoutList workouts={workouts}/>
-        </div>
-        </div>
+                <div>
+                    <h1>Dashboard</h1>
+                    <DashStats />
+                    <p>StatsPro</p>
+                    <p>Logout</p>
+                    <hr/>
+                </div>
+                <div>
+                <h2>Add a new Set</h2>
+                <button role="button" style={{ width: '20%' }} class="contrast"> button</button>
+                </div>
+                </div>
+                <details>
+                <summary role="button" class="contrast">Sets</summary>
+                <h2> <WorkoutList user={user}/></h2>
+                </details>
+           
+            
+          </div>
+      
+        
     )
-}
-
+    }
+    
 export default Dashboard

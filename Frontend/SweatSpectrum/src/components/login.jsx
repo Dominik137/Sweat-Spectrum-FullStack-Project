@@ -1,11 +1,13 @@
+import { data } from "autoprefixer";
 import { useState, useEffect } from "react";
+import Dashboard from "./dashboard";
 
-function LogIn() {
-  const [user, setUser] = useState(null);
+function LogIn({user, setUser}) {
   const [createUsername, setCreateUsername] = useState("");
   const [createPassword, setCreatePassword] = useState('');
   const [logInStatus, setLoginStatus] = useState('')
   const [usernameStatus, setUsernameStatus] = useState('')
+ 
 
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState('');
@@ -31,14 +33,15 @@ function LogIn() {
              
           }
         })
-        .then(data => setUser(data));
+        .then(data => setUser(data))
     // Clear form inputs after submission
     setLoginUsername("");
     setLoginPassword("");
     setLoginStatus("");
+    
     }
   }
-
+  
   function handleCreateUser(e){
     e.preventDefault()
     console.log("Submitting user creation:", createUsername, createPassword);
@@ -66,17 +69,7 @@ function LogIn() {
       setUsernameStatus('')
   }
 
-  useEffect(() => {
-    fetch('/api/session')
-      .then(r => {
-        if (r.ok) {
-          return r.json();
-        } else {
-          return null;
-        }
-      })
-      .then(data => setUser(data));
-  }, []);
+  
 
 function handleLogout(id){
   fetch('/api/logout', {
@@ -87,14 +80,13 @@ function handleLogout(id){
 // then it will setUser to null on the front end
 
 
-
   return (
     <>
       <div className="grid">
       {user ?
         <>
           <h2>Welcome, {user.username}!</h2>
-          <button onClick={handleLogout}>Logout</button>
+          <button role="button" class="contrast" onClick={handleLogout}>Logout</button>
         </>
         :
         <>
@@ -113,7 +105,7 @@ function handleLogout(id){
                 value={createPassword}
                 onChange={(e) => setCreatePassword(e.target.value)}
               />
-              <button type="submit" className="btn-green">Create User</button>
+              <button role="button" class="contrast" type="submit" className="btn-green">Create User</button>
               <h3>{usernameStatus}</h3>
             </form>
           </div>
@@ -132,7 +124,7 @@ function handleLogout(id){
             value={loginPassword}
             onChange={(e) => setLoginPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button role="button" class="contrast" type="submit">Login</button>
           <h3>{logInStatus}</h3>
         </form>
         </div>
