@@ -79,22 +79,6 @@ def get_all_workouts():
         for workout in all_workouts:
             workout_dicts.append(workout.to_dict())
         return make_response(workout_dicts, 200)
-    # elif request.method == "POST":
-    #     #Post request added here - adding a workout for a user
-    #     try:
-    #         data = request.get_json()
-    #         workout = Workout(
-    #             type=data['type'],
-    #             duration=data['duration'],
-    #             date=datetime.strptime(data['date'], '%Y-%m-%d').date(),
-    #             time=datetime.strptime(data['time'], '%H:%M:%S').time(),
-    #             attributes=data['attributes']
-    #             )
-    #         db.session.add(workout)
-    #         db.session.commit()
-    #         return jsonify(workout.to_dict()), 201
-    #     except Exception as e:
-    #         return make_response({"errors": [str(e)]}, 404)
 
 #Creates a route to get all the set workouts
 @app.route('/set_workouts', methods=["GET"])
@@ -136,46 +120,73 @@ def get_user_workouts(user_id):
             user_workouts[set.id] = workouts_for_set
 
         return make_response(jsonify(user_workouts), 200)
-    elif request.method == "POST":
-        #Post request added here - adding a workout for a user
-        try:
-            data = request.get_json()
-            workout = Workout(
-                type=data['type'],
-                duration=data['duration'],
-                date=datetime.strptime(data['date'], '%Y-%m-%d').date(),
-                time=datetime.strptime(data['time'], '%H:%M:%S').time(),
-                attributes=data['attributes']
-                )
-            db.session.add(workout)
-            db.session.commit()
-            return jsonify(workout.to_dict()), 201
-        except Exception as e:
-            return make_response({"errors": [str(e)]}, 404)
-            # new_set_workout = Set_Workout(
-            #     set_id = json_dict.get("set_id"),
-            #     workout_id = new_workout.id
-            # )
-            # db.session.add(new_set_workout)
-            # db.session.commit()
-            # return new_workout.to_dict(),201
-        # except:
-        #     return make_response({"errors": ["validation errors"]}, 404)
     elif request.method == "DELETE":
         #Delete request added here - deleting a workout for a user
         pass
     elif request.method == "PATCH":
         #Patch request added here - updating a workout for a user
         pass
-        
-@app.route('/all_sets', methods=["GET"])
-def get_all_sets():
+    
+#Creating a new route for: checks if there's a curent set id - if not (read as zer0), create a new one.
+@app.route('/new_workout/<int:user_id>/<int:set_id>', methods=["GET", "POST"])
+def create_user_workout(user_id, set_id):
     if request.method == "GET":
-        all_sets = Set.query.all()
-        set_dicts = []
-        for set in all_sets:
-            set_dicts.append(set.to_dict())
-        return make_response(set_dicts, 200)
+        pass
+    elif request.method == "POST":
+        #This line basically says: if the set ID is 0... [then create a new set and add the workout to that set]
+        if set_id == 0:
+            try:
+                data = request.get_json()
+                workout = Workout(
+                    type=data['type'],
+                    duration=data['duration'],
+                    date=datetime.strptime(data['date'], '%Y-%m-%d').date(),
+                    time=datetime.strptime(data['time'], '%H:%M:%S').time(),
+                    attributes=data['attributes']
+                    )
+                db.session.add(workout)
+                db.session.commit()
+                
+                new_set = Set(user_id=user_id)
+                db.session.add(new_set)
+                db.session.commit()
+
+                new_set_workout = Set_Workout(
+                    set_id = new_set.id,
+                    workout_id = workout.id
+                )
+                db.session.add(new_set_workout)
+                db.session.commit()
+
+                return jsonify(workout.to_dict()), 201
+            except Exception as e:
+                return make_response({"errors": [str(e)]}, 404)
+        #This line basically says: if the set ID already exists aka is greater than 0... [then add the workout to that set]
+        elif set_id > 0:
+            try:
+                data = request.get_json()
+                workout = Workout(
+                    type=data['type'],
+                    duration=data['duration'],
+                    date=datetime.strptime(data['date'], '%Y-%m-%d').date(),
+                    time=datetime.strptime(data['time'], '%H:%M:%S').time(),
+                    attributes=data['attributes']
+                    )
+                db.session.add(workout)
+                db.session.commit()
+
+                new_set_workout = Set_Workout(
+                    #Set to the current set_id
+                    set_id = set_id,
+                    workout_id = workout.id
+                )
+                db.session.add(new_set_workout)
+                db.session.commit()
+
+                return jsonify(workout.to_dict()), 201
+            except Exception as e:
+                return make_response({"errors": [str(e)]}, 404)
+        
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
