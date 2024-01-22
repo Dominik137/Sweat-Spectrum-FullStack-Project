@@ -100,8 +100,7 @@ def get_set_workout(id):
         else:
             return make_response({"error": "Not found"}, 404)
 
-#Creates a route for returning ALL of a users workouts based on sets
-
+#Creates a route for returning ALL of a users workouts based on sets – MAIN DASHBOARD VIEW FOR A USER
 @app.route('/users/<int:user_id>/workouts', methods=["GET", "POST", "DELETE", "PATCH"])
 def get_user_workouts(user_id):
     if request.method == "GET":
