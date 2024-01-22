@@ -45,7 +45,7 @@ class Workout(db.Model, SerializerMixin):
     attributes = db.Column(db.String, nullable=False)
 
     #Set set_workout relationship
-    Set_Workouts = db.relationship('Set_Workout', back_populates='workout')
+    Set_Workouts = db.relationship('Set_Workout', back_populates='workout', cascade="all, delete-orphan")
 
     #Serialize Workout
     serialize_rules = ('-Set_Workouts.workout',)
@@ -55,8 +55,6 @@ class Workout(db.Model, SerializerMixin):
     def to_dict(self):
         data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
         for key, value in data.items():
-            # if isinstance(value, datetime.timedelta):
-            #     data[key] = str(value)
             if isinstance(value, datetime.date):
                 data[key] = value.isoformat()
             elif isinstance(value, datetime.time):

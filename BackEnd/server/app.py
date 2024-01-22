@@ -129,6 +129,32 @@ def get_user_workouts(user_id):
     elif request.method == "PATCH":
         #Patch request added here - updating a workout for a user
         pass
+
+#Creates a route for deleting a single workout by ID 
+@app.route('/users/<int:user_id>/workouts/<int:workout_id>', methods=["DELETE", "PATCH"])
+def modify_user_workout(user_id, workout_id):
+    if request.method == "DELETE":
+        workout_to_delete = Workout.query.get(workout_id)
+        if workout_to_delete:
+            db.session.delete(workout_to_delete)
+            db.session.commit()
+            return make_response({"success": "Workout deleted"}, 204)
+        else:
+            return make_response({"error": "Not found"}, 404)
+    elif request.method == "PATCH":
+        #Working: type update, duration update, attributes update
+        #Not working: date update, time update
+        single_workout = Workout.query.filter(Workout.id == workout_id).first()
+        if single_workout:
+            try:
+                data = request.get_json()
+                for attr in data:
+                    setattr(single_workout, attr, data[attr])
+                db.session.add(single_workout)
+                db.session.commit()
+                return make_response(single_workout.to_dict(), 202)
+            except Exception as e:
+                return make_response({"errors": [str(e)]}, 404)
     
 #Creating a new route for: checks if there's a curent set id - if not (read as zer0), create a new one.
 @app.route('/new_workout/<int:user_id>/<int:set_id>', methods=["GET", "POST"])
@@ -189,6 +215,8 @@ def create_user_workout(user_id, set_id):
                 return jsonify(workout.to_dict()), 201
             except Exception as e:
                 return make_response({"errors": [str(e)]}, 404)
+    # elif request.method == "DELETE":
+    #     pass
         
 
 if __name__ == '__main__':
