@@ -1,5 +1,5 @@
 function WorkoutPost({workout}){
-    console.log(workout)
+    // console.log(workout)
     
     const attributes = workout.attributes || {};
 

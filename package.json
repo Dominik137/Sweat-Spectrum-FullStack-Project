@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "@picocss/pico": "^1.5.11",
+    "@vitejs/plugin-react": "^4.2.1",
+    "install": "^0.13.0",
+    "npm": "^10.3.0",
     "react-router-dom": "^6.21.3"
   },
   "devDependencies": {

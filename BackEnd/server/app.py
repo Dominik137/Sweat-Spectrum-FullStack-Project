@@ -117,7 +117,17 @@ def get_user_workouts(user_id):
                 workout_dict = workout_details.to_dict()
                 workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
                 workouts_for_set.append(workout_dict)
-            user_workouts_list.append(workouts_for_set)
+
+            # Include set ID and workouts in the response
+            user_workouts_list.append({
+                'set_id': set.id,
+                'workouts': workouts_for_set
+            })
+
+        # Wrap the entire response in another list containing set IDs
+        response_data = [{'set_ids': [set['set_id'] for set in user_workouts_list]}, user_workouts_list]
+        
+        return make_response(jsonify(response_data), 200)
         
         return make_response(jsonify(user_workouts_list), 200)
     elif request.method == "POST":

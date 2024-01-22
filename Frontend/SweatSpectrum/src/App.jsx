@@ -18,6 +18,7 @@ import {
   Router,
   Link
 } from "react-router-dom";
+import NewSetForm from './components/NewSetForm';
 
 
 
@@ -52,7 +53,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard user={user}/>}/>
           <Route path="/statspro" element={<StatsPro />}/>
           <Route path="/analytics" element={<Analytics />}/>
-          <Route path="/new-workout" element={<NewWorkoutForm />}/>
+          <Route path="/new-workout" element={<NewWorkoutForm user={user}/>}/>
+          <Route path="/new-set" element={<NewSetForm />}/>
         </Routes>
         {/* <Footer /> */}
         {/* <ScrollToTop/> */}

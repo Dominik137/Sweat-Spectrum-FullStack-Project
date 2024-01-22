@@ -1,11 +1,17 @@
 import DashStats from "./DashStats"
 import WorkoutList from "./DashWorkouts"
 import {useState, useEffect} from "react"
-
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard({user}){
    
    
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    // Navigate to the new workout form page
+    navigate('/new-set'); 
+  };
+
    
 
 
@@ -22,7 +28,7 @@ function Dashboard({user}){
                 </div>
                 <div>
                 <h2>Add a new Set</h2>
-                <button role="button" style={{ width: '20%' }} class="contrast"> button</button>
+                <button onClick={handleButtonClick} role="button" style={{ width: '20%' }} class="contrast"> button</button>
                 </div>
                 </div>
                 <details>
