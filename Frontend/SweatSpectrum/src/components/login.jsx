@@ -94,7 +94,7 @@ function LogIn({ user, setUser }) {
                   value={createPassword}
                   onChange={(e) => setCreatePassword(e.target.value)}
                 />
-                <button role="button" className="contrast" type="submit" className="btn-green">Create User</button>
+                <button role="button" className="contrast" type="submit">Create User</button>
                 <h3>{usernameStatus}</h3>
               </form>
             </div>

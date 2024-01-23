@@ -19,6 +19,7 @@ import {
   Link
 } from "react-router-dom";
 import NewSetForm from './components/NewSetForm';
+import EditWorkoutForm from './components/EditWorkoutForm';
 
 
 
@@ -62,6 +63,7 @@ function App() {
           <Route path="/analytics" element={<Analytics />}/>
           <Route path="/new-workout" element={<NewWorkoutForm user={user}/>}/>
           <Route path="/new-set" element={<NewSetForm user={user} />}/>
+          <Route path="/edit-workout/:id" element={<EditWorkoutForm user={user} />} />
         </Routes>
         {/* <Footer /> */}
         {/* <ScrollToTop/> */}
