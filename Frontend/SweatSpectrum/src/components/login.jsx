@@ -75,63 +75,73 @@ function LogIn({ user, setUser }) {
   return (
     <>
       <div className="grid">
-      {user ?
-        <>
-          <h2>Welcome, {user.username}!</h2>
-          <button role="button" class="contrast" onClick={handleLogout}>Logout</button>
-        </>
-        :
-        <>
-        <div>
-          <article className="test">
-              <h1>
-                Create Account
-              </h1>
+        {user ? (
+          <>
+            <h2>Welcome, {user.username}!</h2>
+            
+          </>
+        ) : (
+          <>
+            <div className="test">
+              <h1>Create Account</h1>
               <p>Enter a new username and password to create your account.</p>
               <form onSubmit={handleCreateUser}>
-              <input
-                type="text"
-                value={createUsername}
-                onChange={(e) => setCreateUsername(e.target.value)}
-              />
-              <input
-                type="password"
-                value={createPassword}
-                onChange={(e) => setCreatePassword(e.target.value)}
-              />
-              <button role="button" class="contrast" type="submit" className="btn-green">Create User</button>
-              <h3>{usernameStatus}</h3>
-            </form>
-          </div>
-          <div>
-          <h1>
-                Log In!
-              </h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={loginUsername}
-            onChange={(e) => setLoginUsername(e.target.value)}
-          />
-           <input
-            type="password"
-            value={loginPassword}
-            onChange={(e) => setLoginPassword(e.target.value)}
-          />
-          <button role="button" class="contrast" type="submit">Login</button>
-          <h3>{logInStatus}</h3>
-        </form>
-        </div>
-        </>
-      }
+                <input
+                  type="text"
+                  value={createUsername}
+                  onChange={(e) => setCreateUsername(e.target.value)}
+                />
+                <input
+                  type="password"
+                  value={createPassword}
+                  onChange={(e) => setCreatePassword(e.target.value)}
+                />
+                <button
+                  role="button"
+                  className="contrast btn-green"
+                  type="submit"
+                >
+                  Create User
+                </button>
+                <h3>{usernameStatus}</h3>
+              </form>
+            </div>
+            <div>
+              <h1 className="contrast">Log In!</h1>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={loginUsername}
+                  onChange={(e) => setLoginUsername(e.target.value)}
+                />
+                <input
+                  type="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                />
+                <button role="button" className="contrast" type="submit">
+                  Login
+                </button>
+                <h3>{logInStatus}</h3>
+              </form>
+            </div>
+          </>
+        )}
       </div>
       {user && (
         <div className="navbar">
-          <button role="button" className="contrast" style={{ width: '20%' }} onClick={handleLogout}>Logout</button>
+          <button
+            role="button"
+            className="contrast"
+            style={{ width: '20%' }}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </div>
       )}
     </>
   );
-}
+      }
 
 export default LogIn;
