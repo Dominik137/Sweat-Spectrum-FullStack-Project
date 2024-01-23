@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+.test{
+  max-width: 40% ;
+  display: inline-block;
+  padding: 4em;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

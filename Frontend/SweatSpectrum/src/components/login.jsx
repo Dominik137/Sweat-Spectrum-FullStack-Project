@@ -90,43 +90,51 @@ function handleLogout(id){
         </>
         :
         <>
-          <div >
+        <div>
+          <article className="test">
               <h1>
                 Create User!
               </h1>
+              <p>Enter a new username and password to create your account.</p>
               <form onSubmit={handleCreateUser}>
               <input
                 type="text"
+                placeholder="Create Username"
                 value={createUsername}
                 onChange={(e) => setCreateUsername(e.target.value)}
               />
               <input
                 type="password"
+                placeholder="Create Password"
                 value={createPassword}
                 onChange={(e) => setCreatePassword(e.target.value)}
               />
               <button role="button" class="contrast" type="submit" className="btn-green">Create User</button>
               <h3>{usernameStatus}</h3>
             </form>
-          </div>
-          <div>
+          </article>
+          <div className = "test">
           <h1>
                 Log In!
               </h1>
+              <p>Already have an account? Fill in your details below to log in. </p>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
+            placeholder="Username"
             value={loginUsername}
             onChange={(e) => setLoginUsername(e.target.value)}
           />
            <input
             type="password"
+            placeholder="Password"
             value={loginPassword}
             onChange={(e) => setLoginPassword(e.target.value)}
           />
           <button role="button" class="contrast" type="submit">Login</button>
           <h3>{logInStatus}</h3>
         </form>
+        </div>
         </div>
         </>
       }
