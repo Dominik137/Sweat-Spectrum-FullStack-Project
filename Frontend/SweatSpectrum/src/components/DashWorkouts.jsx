@@ -29,16 +29,51 @@ function WorkoutList({ user }) {
     navigate('/new-workout', { state: { setIds: setIdValue } });
   };
 
+  const handleDelete = (setId, workoutId) => {
+    fetch(`/api/users/${user?.id}/workouts/${workoutId}`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (response.ok) {
+          // Update local state by filtering out the deleted workout
+          setAllSets(prevSets => {
+            const updatedSets = prevSets.map(set => {
+              if (set.set_id === setId) {
+                return {
+                  ...set,
+                  workouts: set.workouts.filter(workout => workout.id !== workoutId)
+                };
+              }
+              return set;
+            });
+
+            // Filter out sets with 0 workouts
+            return updatedSets.filter(set => set.workouts.length > 0);
+          });
+        } else {
+          // Handle error, e.g., show an error message
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting workout:', error);
+      });
+  };
+
   return (
     <div>
-      <button onClick={() => handleButtonClick(allSets[0]?.set_id)} role="button" className="contrast" style={{ width: '20%' }}>
-        Add New Workout
-      </button>
       {allSets.map(set => (
         <div key={set.set_id}>
+          <button onClick={() => handleButtonClick(set.set_id)} role="button" className="contrast" style={{ width: '20%' }}>
+            Add New Workout for Set {set.set_id}
+          </button>
           <h2>Set Name: {set.set_id}</h2>
           {set.workouts.map(workout => (
-            <WorkoutPost key={workout.id} workout={workout} />
+            <WorkoutPost
+              key={workout.id}
+              user={user}
+              workout={workout}
+              handleDelete={() => handleDelete(set.set_id, workout.id)}
+            />
           ))}
         </div>
       ))}

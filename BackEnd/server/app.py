@@ -140,12 +140,20 @@ def get_user_workouts(user_id):
         #Patch request added here - updating a workout for a user
         pass
 
+
 # Creates a route for deleting a single workout by ID 
 # MAIN WORKOUT EDIT FUNCTIONALITY FOR USER
-@app.route('/users/<int:user_id>/workouts/<int:workout_id>', methods=["DELETE", "PATCH"])
+@app.route('/users/<int:user_id>/workouts/<int:workout_id>', methods=["DELETE", "PATCH", "GET"])
 def modify_user_workout(user_id, workout_id):
+    if request.method == "GET":
+        workout = Workout.query.get(workout_id)
+        if workout:
+            return make_response(workout.to_dict(), 200)
+        else:
+            return make_response({"error": "Workout not found"}, 404)
+    
     # Delete a single workout by ID
-    if request.method == "DELETE":
+    elif request.method == "DELETE":
         workout_to_delete = Workout.query.get(workout_id)
         if workout_to_delete:
             db.session.delete(workout_to_delete)
