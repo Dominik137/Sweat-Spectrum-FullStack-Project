@@ -1,7 +1,26 @@
-function DashStats(){
+function DashStats({userWorkouts}){
+
+    console.log(userWorkouts);
+    // console.log(userWorkouts[0])
+
+    const displayWorkoutStats = userWorkouts.map((userWorkout) => {
+        console.log(userWorkout)
+            userWorkout.workouts.map((workoutObj) => {
+                console.log(workoutObj)
+            }
+            )
+    })
+        //   workoutObj.workouts.map((workout) => 
+        //     workout.attributes["active calories"]
+        //   )
+        // )
+    //   );
+
+    // console.log(displayWorkoutStats);
+
     return(
-        //High level dashboard stats go here - for a single user only, and can feature items like "Workout Day Streak" or "Most Workouts in a Week"
         <>
+        {/* {displayWorkoutStats */}
         <div className="basic-stats-container">
 
             <article className="daily-streak">
