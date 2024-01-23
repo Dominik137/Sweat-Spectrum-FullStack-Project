@@ -126,11 +126,12 @@ def get_user_workouts(user_id):
             })
 
         # Wrap the entire response in another list containing set IDs
-        response_data = [{'set_ids': [set['set_id'] for set in user_workouts_list]}, user_workouts_list]
+        # response_data = [{'set_ids': [set['set_id'] for set in user_workouts_list]}, user_workouts_list]
         
-        return make_response(jsonify(response_data), 200)
+        # return make_response(jsonify(response_data), 200)
         
         return make_response(jsonify(user_workouts_list), 200)
+    
     elif request.method == "POST":
         #Post request added here - adding a workout for a user
         pass
