@@ -13,7 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+.logo{
+  margin-top:20px;
+  margin-left: 20px;
 
+}
 .test{
   max-width: 40% ;
   display: inline-block;
