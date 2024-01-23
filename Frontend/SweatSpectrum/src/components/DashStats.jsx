@@ -5,10 +5,10 @@ function DashStats({userWorkouts}){
 
     const displayWorkoutStats = userWorkouts.map((userWorkout) => {
         console.log(userWorkout)
-            userWorkout.workouts.map((workoutObj) => {
-                console.log(workoutObj)
-            }
-            )
+            // userWorkout.workouts.map((workoutObj) => {
+            //     console.log(workoutObj)
+            // }
+            // )
     })
         //   workoutObj.workouts.map((workout) => 
         //     workout.attributes["active calories"]
