@@ -127,6 +127,10 @@ function DashStats({userWorkouts}){
     function getAverage(array) {
         let sum = 0;
         for (let i = 0; i < array.length; i++) {
+            //Handle if no calories entered in form 
+            if (isNaN(array[i])) {
+                continue;
+            }
             sum += parseInt(array[i]) //don't forget to add the base
         }
         return sum / array.length;
