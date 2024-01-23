@@ -13,10 +13,29 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+
 .test{
   max-width: 40% ;
   display: inline-block;
   padding: 4em;
+}
+
+.list-attributes{
+  list-style: none;
+  display: flex;
+  margin:0;
+  padding:0;
+}
+
+.attr-name{
+  font-weight: bold;
+  font-size: 0.8em;
+  text-decoration: underline pink;
+}
+
+.attr-val{
+  font-size: 0.8em;
+  padding-left: 20px;
 }
 
 a {

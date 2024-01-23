@@ -18,8 +18,9 @@ function WorkoutPost({ workout }) {
           </summary>
           <ul>
             {Object.entries(attributes).map(([attribute, value]) => (
-              <li key={attribute}>
-                {attribute}: {value}
+              <li className="list-attributes" key={attribute}>
+                <p className="attr-name">{attribute}:</p> 
+                <p className="attr-val">{value}</p>
               </li>
             ))}
           </ul>

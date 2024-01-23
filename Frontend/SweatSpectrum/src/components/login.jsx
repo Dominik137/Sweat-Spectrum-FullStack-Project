@@ -93,7 +93,7 @@ function handleLogout(id){
         <div>
           <article className="test">
               <h1>
-                Create User!
+                Create Account
               </h1>
               <p>Enter a new username and password to create your account.</p>
               <form onSubmit={handleCreateUser}>
@@ -115,7 +115,7 @@ function handleLogout(id){
           </article>
           <div className = "test">
           <h1>
-                Log In!
+                Log In
               </h1>
               <p>Already have an account? Fill in your details below to log in. </p>
         <form onSubmit={handleSubmit}>
