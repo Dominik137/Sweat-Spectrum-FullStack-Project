@@ -4,7 +4,9 @@
     "@vitejs/plugin-react": "^4.2.1",
     "install": "^0.13.0",
     "npm": "^10.3.0",
-    "react-router-dom": "^6.21.3"
+    "react-datepicker": "^4.25.0",
+    "react-router-dom": "^6.21.3",
+    "react-time-picker": "^6.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",

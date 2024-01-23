@@ -1,31 +1,36 @@
-function WorkoutPost({workout}){
-    // console.log(workout)
-    
-    const attributes = workout.attributes || {};
+import React from 'react';
 
-    return(
-        <>
-        <article>
-            <h2>{workout.type}</h2>
-            <details >
-            <summary role="button" class="secondary" style={{ width: '50%' }}>Stats</summary>
-            <ul>
-            {Object.entries(workout.attributes).map(([attribute, value]) => (
+function formatTime(time) {
+  const date = new Date(`1970-01-01T${time}`);
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function WorkoutPost({ workout }) {
+  const attributes = workout.attributes || {};
+
+  return (
+    <>
+      <article>
+        <h2>{workout.type}</h2>
+        <details>
+          <summary role="button" className="secondary" style={{ width: '50%' }}>
+            Stats
+          </summary>
+          <ul>
+            {Object.entries(attributes).map(([attribute, value]) => (
               <li key={attribute}>
                 {attribute}: {value}
-                {/* loops thru all the attributes and adds them to each workout */}
               </li>
             ))}
-            </ul>
-            </details>
-            <p>Date: {workout.date}</p>
-            <p>Duration: {workout.duration}</p>
-            <p>id: {workout.id}</p>
-            <p>Time: {workout.time}</p>
-        </article>
-        </>
-    )
-
+          </ul>
+        </details>
+        <p>Date: {workout.date}</p>
+        <p>Duration: {workout.duration}</p>
+        <p>id: {workout.id}</p>
+        <p>Time: {formatTime(workout.time)}</p>
+      </article>
+    </>
+  );
 }
 
 export default WorkoutPost;
