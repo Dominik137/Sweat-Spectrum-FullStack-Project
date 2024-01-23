@@ -83,7 +83,7 @@ function LogIn({ user, setUser }) {
         :
         <>
         <div>
-          <article className="test">
+          <div className="test">
               <h1>
                 Create Account
               </h1>
