@@ -13,6 +13,22 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+.chart-area{
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+.run-chart{
+  background-color: #3949ab;
+}
+
+.swim-chart{
+  background-color: #00acc1;
+}
+
+
+
 .logo{
   margin-top:20px;
   margin-left: 20px;

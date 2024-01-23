@@ -27,40 +27,83 @@ function StatsPro({user}){
             <button> LINK TO ANALYTICS PAGE HERE</button>
 
             <h2>Runs</h2>
+            <div className="run-chart chart-area">
+                <article className="distance"> 
+                    <Bar 
+                        data={{
+                            labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                            datasets: [ 
+                                {
+                                    label: "Distance",
+                                    data: [9.5, 3.5, 10.5],
+                                },
 
-            <article className="run-chart-distance"> 
-                <Bar 
-                    data={{
-                        labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
-                        datasets: [ 
-                            {
-                                label: "Distance",
-                                data: [9.5, 3.5, 10.5],
-                            },
+                            ],
+                        }}
+                    />
+                </article>
+            </div>
 
-                        ],
-                    }}
-                />
-            </article>
+            <div className="run-chart chart-area">
+                <article className="hr"> 
+                    <Bar 
+                        data={{
+                            labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                            datasets: [ 
+                                {
+                                    label: "Avg. Heart Rate",
+                                    data: [120, 130, 140],
+                                },
+                                {
+                                    label: "Max. Heart Rate",
+                                    data: [156, 164, 180],
+                                },
 
-            <article className="run-chart-hr"> 
-                <Bar 
-                    data={{
-                        labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
-                        datasets: [ 
-                            {
-                                label: "Avg. Heart Rate",
-                                data: [120, 130, 140],
-                            },
-                            {
-                                label: "Max. Heart Rate",
-                                data: [156, 164, 180],
-                            },
+                            ],
+                        }}
+                    />
+                </article>
+            </div>
 
-                        ],
-                    }}
-                />
-            </article>
+            <h2>Swims</h2>
+            <div className="swim-chart chart-area">
+                <article className="distance"> 
+                    <Bar 
+                        data={{
+                            labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                            datasets: [ 
+                                {
+                                    label: "Distance",
+                                    data: [9.5, 3.5, 10.5],
+                                },
+
+                            ],
+                        }}
+                    />
+                </article>
+            </div>
+
+            <div className="swim-chart chart-area">
+                <article className="hr"> 
+                    <Bar 
+                        data={{
+                            labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                            datasets: [ 
+                                {
+                                    label: "Avg. Heart Rate",
+                                    data: [120, 130, 140],
+                                },
+                                {
+                                    label: "Max. Heart Rate",
+                                    data: [156, 164, 180],
+                                },
+
+                            ],
+                        }}
+                    />
+                </article>
+            </div>
+
         </div>
     )
 }

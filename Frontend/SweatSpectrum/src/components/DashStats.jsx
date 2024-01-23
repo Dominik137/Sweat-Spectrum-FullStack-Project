@@ -1,59 +1,61 @@
 function DashStats({userWorkouts}){
 
     // ++++++++++++++++++++++++++++++++++++ DAILY STREAK ++++++++++++++++++++++++++++++++++++++++++
-    // Create a function to get all a users workout dates from their workouts
+
+    // Function to get all a users workout dates from their workouts
     const getWorkoutDates = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
             return workout.date
         })
     })
 
-    console.log(getWorkoutDates)
-
+    // Combine the multiple arrays of workout dates into one array
     const workoutDates = [].concat.apply([], getWorkoutDates)
 
-    console.log(workoutDates)
-
+    // Function to get the longest daily streak from an array of dates
     function getDailyStreak(array) {
         // Remove duplicates and sort the array
-    const sortedDates = Array.from(new Set(array)).sort();
+        const sortedDates = Array.from(new Set(array)).sort();
 
-    // Convert strings to Date objects
-    const dateObjects = sortedDates.map(dateStr => new Date(dateStr));
+        // Convert strings to Date objects
+        const dateObjects = sortedDates.map(dateStr => new Date(dateStr));
 
-    let longestStreak = 0;
-    let currentStreak = 1;
+        let longestStreak = 0;
+        let currentStreak = 1;
 
-    for (let i = 0; i < dateObjects.length - 1; i++) {
-        // Calculate the difference in days between the current date and the next one
-        const diffInDays = Math.round((dateObjects[i + 1] - dateObjects[i]) / (1000 * 60 * 60 * 24));
+        for (let i = 0; i < dateObjects.length - 1; i++) {
+            // Calculate the difference in days between the current date and the next one
+            const diffInDays = Math.round((dateObjects[i + 1] - dateObjects[i]) / (1000 * 60 * 60 * 24));
 
-        if (diffInDays === 1) {
-            // If the next date is the day after the current one, increment the streak
-            currentStreak++;
-        } else if (diffInDays > 1) {
-            // If the next date is not the day after the current one, reset the streak
-            currentStreak = 1;
+            if (diffInDays === 1) {
+                // If the next date is the day after the current one, increment the streak
+                currentStreak++;
+            } else if (diffInDays > 1) {
+                // If the next date is not the day after the current one, reset the streak
+                currentStreak = 1;
+            }
+
+            // Update the longest streak
+            longestStreak = Math.max(longestStreak, currentStreak);
         }
 
-        // Update the longest streak
-        longestStreak = Math.max(longestStreak, currentStreak);
+        return longestStreak;
     }
 
-    return longestStreak;
-    }
-
+    // Create variable to store daily streak for rendering on page
    let dailyStreak = getDailyStreak(workoutDates)
 
 
     // ++++++++++++++++++++++++++++++++++++ MOST COMMON WORKOUT ++++++++++++++++++++++++++++++++++++++++++
-    // Function to get all a users workout types from their workouts
+
+    // Function to get all of a users workout types from their workouts
     const getTopWorkout = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
             return workout.type
         })
     })
 
+    // Combine the multiple arrays of workout types into one array
     const topWorkout = [].concat.apply([], getTopWorkout)
 
 
@@ -78,6 +80,8 @@ function DashStats({userWorkouts}){
         }
         return top
     }
+
+    // Create variable to store most common workout type for rendering on page
     let topWorkoutType = mostCommonWorkout(topWorkout)
 
     // Function to return an emoji based on the top workout type
@@ -108,11 +112,13 @@ function DashStats({userWorkouts}){
         }
     }
 
+    // Create variable to store emoji for rendering on page
     let topWorkoutEmoji = workoutEmoji(topWorkoutType)
 
 
 
     // ++++++++++++++++++++++++++++++++++++ AVG CALORIES ++++++++++++++++++++++++++++++++++++++++++ 
+
     // Create a function to get all a users active calories from their workouts
     const getActiveCals = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -122,7 +128,6 @@ function DashStats({userWorkouts}){
     // Combine the multiple arrays of active calories into one array
     const activeCals = [].concat.apply([], getActiveCals)
 
-    
     // Create a function to get all a users total calories from their workouts and divide by the array length (avg)
     function getAverage(array) {
         let sum = 0;
@@ -136,7 +141,7 @@ function DashStats({userWorkouts}){
         return sum / array.length;
     }
 
-    // Create variable to store average calorie burn for use on page
+    // Create variable to store average calorie burn for rendering on page
     let averageCalorieBurn = getAverage(activeCals)
 
 
