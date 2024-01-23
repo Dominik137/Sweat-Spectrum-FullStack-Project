@@ -133,8 +133,8 @@ function NewWorkoutForm({ user }) {
 
   return (
     <div>
-      <h2>New Workout Form</h2>
-      <p>Set IDs: {setIds}</p>
+      <h2>Add A New Workout</h2>
+      {/* <p>Set IDs: {setIds}</p> */}
       <form>
         <label>
           Workout Type:
