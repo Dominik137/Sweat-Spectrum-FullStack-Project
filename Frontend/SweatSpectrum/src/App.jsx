@@ -40,6 +40,13 @@ function App() {
       });
   }, []);
 
+  function handleLogout() {
+    fetch('/api/logout', {
+      method: "DELETE"
+    })
+      .then(r => setUser(null));
+  }
+
 
 
 
@@ -47,14 +54,14 @@ function App() {
     <div>
       
         <BrowserRouter>
-        <Nav/>
+        <Nav handleLogout={handleLogout} user={user}/>
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser}/>}/>  
           <Route path="/dashboard" element={<Dashboard user={user}/>}/>
           <Route path="/statspro" element={<StatsPro />}/>
           <Route path="/analytics" element={<Analytics />}/>
           <Route path="/new-workout" element={<NewWorkoutForm user={user}/>}/>
-          <Route path="/new-set" element={<NewSetForm />}/>
+          <Route path="/new-set" element={<NewSetForm user={user} />}/>
         </Routes>
         {/* <Footer /> */}
         {/* <ScrollToTop/> */}

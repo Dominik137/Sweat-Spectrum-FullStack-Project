@@ -7,10 +7,12 @@ function Dashboard({user}){
    
    
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    // Navigate to the new workout form page
-    navigate('/new-set'); 
+
+  const handleAddNewSet = () => {
+    // Navigate to the '/new-set' route with a set ID of 0
+    navigate('/new-set');
   };
+
 
   const [userWorkouts, setUserWorkouts] = useState([])
 
@@ -24,32 +26,31 @@ function Dashboard({user}){
 
 
 
-    return(
-        //Full dashboard page that contains the high level stats, individual workouts for a single user, and an "Add Workout" button.
-        <div className="grid">
-            <div>
-                <div>
-                    <h1>Dashboard</h1>
-                    <DashStats userWorkouts = {userWorkouts}/>
-                    <p>StatsPro</p>
-                    <p>Logout</p>
-                    <hr/>
-                </div>
-                <div>
-                <h2>Add a new Set</h2>
-                <button onClick={handleButtonClick} role="button" style={{ width: '20%' }} class="contrast"> button</button>
-                </div>
-                </div>
-                <details>
-                <summary role="button" class="contrast">Sets</summary>
-                <h2> <WorkoutList user={user}/></h2>
-                </details>
-           
-            
-          </div>
-      
+  return (
+    <div className="grid">
+
+        <div>
+          <h1>Dashboard</h1>
+          <DashStats userWorkouts={userWorkouts} />
+          <hr />
+        </div>
+        <div>
+          <h1>Add a new Set</h1>
+          <button onClick={handleAddNewSet} role="button" style={{ width: '20%' }} className="contrast">
+            Add New Set
+          </button>
         
-    )
-    }
+     
+      <details>
+        <summary role="button" className="contrast">
+          Sets
+        </summary>
+        <WorkoutList user={user} />
+      </details>
+      </div>
+    </div> 
+    
+  );
+}
     
 export default Dashboard

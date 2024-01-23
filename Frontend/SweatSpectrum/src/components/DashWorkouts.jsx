@@ -31,11 +31,11 @@ function WorkoutList({ user }) {
 
   return (
     <div>
-      <button onClick={() => handleButtonClick(allSets[0]?.set_id)} role="button" className="contrast" style={{ width: '20%' }}>
-        Add New Workout
-      </button>
       {allSets.map(set => (
         <div key={set.set_id}>
+          <button onClick={() => handleButtonClick(set.set_id)} role="button" className="contrast" style={{ width: '20%' }}>
+            Add New Workout for Set {set.set_id}
+          </button>
           <h2>Set Name: {set.set_id}</h2>
           {set.workouts.map(workout => (
             <WorkoutPost key={workout.id} workout={workout} />
