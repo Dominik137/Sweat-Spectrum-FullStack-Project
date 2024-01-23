@@ -12,7 +12,16 @@ function Dashboard({user}){
     navigate('/new-set'); 
   };
 
-   
+  const [userWorkouts, setUserWorkouts] = useState([])
+
+  useEffect(() => {
+    if (user) {
+      fetch(`/api/users/${user.id}/workouts`)
+        .then(r => r.json())
+        .then(data => setUserWorkouts(data))
+    }
+  }, [user]);
+
 
 
     return(
@@ -21,7 +30,7 @@ function Dashboard({user}){
             <div>
                 <div>
                     <h1>Dashboard</h1>
-                    <DashStats />
+                    <DashStats userWorkouts = {userWorkouts}/>
                     <p>StatsPro</p>
                     <p>Logout</p>
                     <hr/>
