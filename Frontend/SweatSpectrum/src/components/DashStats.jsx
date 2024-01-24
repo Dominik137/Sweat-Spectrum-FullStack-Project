@@ -9,8 +9,6 @@ function DashStats({userWorkouts}){
         })
     })
 
-    console.log(getWorkoutDates)
-
     // Combine the multiple arrays of workout dates into one array
     const workoutDates = [].concat.apply([], getWorkoutDates)
 
@@ -62,25 +60,30 @@ function DashStats({userWorkouts}){
 
 
     // Function to get the most common workout type - NOTE: Currently doesn't work if there's not a "top" workout
-    function mostCommonWorkout(array) {
-        array.sort((a,b) => a-b);
-
-        let count = 1,
-            max = 0,
-            top;
-
-        for (let i = 1; i <array.length; i++) {
-            if (array[i] == array[i-1]) {
-                count++;
-            } else {
-                if (count > max) {
-                    max = count;
-                    top = array[i-1];
-                }
-                count = 1;
-            } 
+    function mostCommonWorkout(workouts) {
+        if (workouts.length === 0) {
+            return "Log More Workouts";
         }
-        return top
+    
+        let counts = {};
+        let maxCount = 0;
+        let mostCommonWorkout = "";
+    
+        for (let i = 0; i < workouts.length; i++) {
+            let workout = workouts[i];
+            if (!counts[workout]) {
+                counts[workout] = 1;
+            } else {
+                counts[workout]++;
+            }
+    
+            if (counts[workout] > maxCount) {
+                maxCount = counts[workout];
+                mostCommonWorkout = workout;
+            }
+        }
+    
+        return mostCommonWorkout;
     }
 
     // Create variable to store most common workout type for rendering on page
