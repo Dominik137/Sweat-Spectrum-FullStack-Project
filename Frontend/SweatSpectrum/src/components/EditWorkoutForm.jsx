@@ -96,6 +96,13 @@ const prefillForm = (data) => {
         alert("Please enter valid minutes and seconds (0-59).");
         return;
       }
+       // Add one day to the current date
+    const updatedDate = new Date(workoutDetails.date);
+    updatedDate.setDate(updatedDate.getDate() - 1);
+    // Format the updated date
+    const formattedUpdatedDate = updatedDate.toISOString().split('T')[0];
+
+
 
       const timeParts = workoutDetails.time.split(':');
       const timeHours = parseInt(timeParts[0], 10);
@@ -118,7 +125,7 @@ const prefillForm = (data) => {
         body: JSON.stringify({
           type: workoutDetails.type,
           duration:`${formattedHours}:${formattedMinutes}:${formattedSeconds}`,
-          date: workoutDetails.date.toISOString().split('T')[0],
+          date: formattedUpdatedDate,
           time: formattedTime,
           attributes: JSON.stringify(attributes),
         }),
