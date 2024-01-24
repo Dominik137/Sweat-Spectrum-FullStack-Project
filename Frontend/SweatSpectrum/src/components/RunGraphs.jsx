@@ -76,6 +76,7 @@ function RunGraphs({userWorkouts}){
 
     return (
         <>
+        <div className="stats-section">
         <h2>Runs</h2>
         <div className="run-chart chart-area">
             <article className="distance"> 
@@ -114,7 +115,7 @@ function RunGraphs({userWorkouts}){
                 />
             </article>
         </div>
-    
+        </div>
     </>
 )
 }
