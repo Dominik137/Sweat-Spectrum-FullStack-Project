@@ -27,7 +27,7 @@ function Dashboard({user}){
 
 
   return (
-    <div className="grid">
+    <div className="grid dash">
 
         <div>
           <h1>Dashboard</h1>
@@ -41,7 +41,7 @@ function Dashboard({user}){
           </button>
         
      
-      <details>
+      <details className="workout-list">
         <summary role="button" className="contrast">
           Sets
         </summary>

@@ -155,22 +155,24 @@ function DashStats({userWorkouts}){
         <div className="basic-stats-container">
 
             <article className="daily-streak">
-                <p>{dailyStreak}</p>
-                <p>Day Workout Streak 🗓️</p>
-            </article>
-
-            <article className="top-weekly-workout">
-                {/* <p> Log at least one workout...</p> */}
-                <p>{topWorkoutType}</p>
-                <p>Most Common Workout {topWorkoutEmoji}</p>
+                <p className="statnum">{dailyStreak} Days</p>
+                <p> Workout Streak 🗓️</p>
             </article>
 
             <article className="avg-calorie-burn">
-                <p>{Math.floor(averageCalorieBurn)}</p>
+                <p className="statnum">{Math.floor(averageCalorieBurn)}</p>
                 <p>Avg Calorie Burn 🔥</p>
             </article>
 
+           
+
         </div>
+        <article className="top-weekly-workout">
+                {/* <p> Log at least one workout...</p> */}
+                <p className="statnum">{topWorkoutType}</p>
+                <p>Most Common Workout {topWorkoutEmoji}</p>
+        </article>
+        <button className="more-stats">Get More Stats →</button>
         
         </>
     )
