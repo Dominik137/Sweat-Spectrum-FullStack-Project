@@ -9,6 +9,8 @@ function DashStats({userWorkouts}){
         })
     })
 
+    console.log(getWorkoutDates)
+
     // Combine the multiple arrays of workout dates into one array
     const workoutDates = [].concat.apply([], getWorkoutDates)
 

@@ -27,7 +27,17 @@
   background-color: #00acc1;
 }
 
+.weight-chart{
+  background-color: #00897b;
+}
 
+.bike-chart{
+  background-color: #8e24aa;
+}
+
+.HIIT-chart{
+  background-color: #f4511e;
+}
 
 .logo{
   margin-top:20px;

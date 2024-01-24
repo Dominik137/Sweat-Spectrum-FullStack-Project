@@ -88,11 +88,13 @@ function LogIn({ user, setUser }) {
               <form onSubmit={handleCreateUser}>
                 <input
                   type="text"
+                  placeholder="Create Username"
                   value={createUsername}
                   onChange={(e) => setCreateUsername(e.target.value)}
                 />
                 <input
                   type="password"
+                  placeholder="Create Password"
                   value={createPassword}
                   onChange={(e) => setCreatePassword(e.target.value)}
                 />
@@ -108,14 +110,17 @@ function LogIn({ user, setUser }) {
             </div>
             <div>
               <h1 className="contrast">Log In!</h1>
+              <p>If you already have an account, log in.</p>
               <form onSubmit={handleSubmit}>
                 <input
                   type="text"
+                  placeholder="Username"
                   value={loginUsername}
                   onChange={(e) => setLoginUsername(e.target.value)}
                 />
                 <input
                   type="password"
+                  placeholder="Password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                 />
