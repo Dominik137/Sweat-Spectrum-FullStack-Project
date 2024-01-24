@@ -48,6 +48,15 @@ function App() {
       .then(r => setUser(null));
   }
 
+  const [userWorkouts, setUserWorkouts] = useState([])
+
+  useEffect(() => {
+    if (user) {
+      fetch(`/api/users/${user.id}/workouts`)
+        .then(r => r.json())
+        .then(data => setUserWorkouts(data))
+    }
+  }, [user]);
 
 
 
@@ -59,7 +68,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser}/>}/>  
           <Route path="/dashboard" element={<Dashboard user={user}/>}/>
-          <Route path="/statspro" element={<StatsPro />}/>
+          <Route path="/statspro" element={<StatsPro user={user} userWorkouts={userWorkouts} />}/>
           <Route path="/analytics" element={<Analytics />}/>
           <Route path="/new-workout" element={<NewWorkoutForm user={user}/>}/>
           <Route path="/new-set" element={<NewSetForm user={user} />}/>
