@@ -65,7 +65,10 @@ function SwimGraphs({userWorkouts}){
     
     return(
         <>
+        <div className="stats-section">
         <h2>Swims</h2>
+        <hr/>
+        <h4>Swim Laps</h4>
             <div className="swim-chart chart-area">
                 <article className="distance"> 
                     <Bar 
@@ -83,6 +86,7 @@ function SwimGraphs({userWorkouts}){
                 </article>
             </div>
 
+            <h4>Duration</h4>
             <div className="swim-chart chart-area">
                 <article className="hr"> 
                     <Bar 
@@ -98,6 +102,7 @@ function SwimGraphs({userWorkouts}){
                         }}
                     />
                 </article>
+            </div>
             </div>
         </>
     )

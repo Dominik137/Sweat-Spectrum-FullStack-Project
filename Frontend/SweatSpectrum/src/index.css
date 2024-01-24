@@ -25,7 +25,11 @@
 
 }
 
-
+.stats-section{
+  max-width: 80%;
+  justify-items: center;
+  margin: 0 auto;
+}
 
 .daily-streak{
   border-radius: 10px;

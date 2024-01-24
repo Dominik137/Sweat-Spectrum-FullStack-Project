@@ -73,7 +73,10 @@ function WeightGraphs({userWorkouts}){
 
     return(
         <>
-        <h2>Weights</h2>
+        <div className="stats-section">
+        <h2>Weight Training</h2>
+        <hr/>
+        <h4>Weight Loads</h4>
         <div className="weight-chart chart-area">
             <article className="distance"> 
                 <Bar 
@@ -91,6 +94,7 @@ function WeightGraphs({userWorkouts}){
             </article>
         </div>
 
+        <h4>Heart Rate</h4>
         <div className="weight-chart chart-area">
             <article className="hr"> 
                 <Bar 
@@ -111,6 +115,7 @@ function WeightGraphs({userWorkouts}){
                     }}
                 />
             </article>
+        </div>
         </div>
         </>
     )

@@ -61,7 +61,11 @@ function BikeGraphs({userWorkouts}){
 
     return(
         <>
-        <h2>Bikes</h2>
+        <div className="stats-section">
+        <h2>Bike Rides</h2>
+        <hr/>
+        <h4>Distance</h4>
+
         <div className="bike-chart chart-area">
             <article className="distance"> 
                 <Bar 
@@ -79,6 +83,7 @@ function BikeGraphs({userWorkouts}){
             </article>
         </div>
 
+        <h4>Elevation Gain</h4>
         <div className="bike-chart chart-area">
             <article className="hr"> 
                 <Bar 
@@ -95,6 +100,7 @@ function BikeGraphs({userWorkouts}){
                     }}
                 />
             </article>
+        </div>
         </div>
         </>
     )

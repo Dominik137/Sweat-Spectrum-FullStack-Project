@@ -64,7 +64,10 @@ function HIITGraphs({userWorkouts}){
 
     return(
         <>
+        <div className="stats-section">
         <h2>HIIT</h2>
+        <hr/>
+        <h4>Calorie Burn</h4>
         {/* <div className="HIIT-chart chart-area">
             <article className="distance"> 
                 <Radar 
@@ -120,6 +123,7 @@ function HIITGraphs({userWorkouts}){
                     }}
                 />
             </article>
+        </div>
         </div>
         </>
     )
