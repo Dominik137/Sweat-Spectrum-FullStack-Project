@@ -4,6 +4,9 @@ import {Chart as ChartJS} from "chart.js/auto"
 import {Bar} from "react-chartjs-2"
 import RunGraphs from "./RunGraphs"
 import SwimGraphs from "./SwimGraphs"
+import BikeGraphs from "./BikeGraphs"
+import WeightGraphs from "./WeightGraphs"
+import HIITGraphs from "./HIITGraphs"
 
 function StatsPro({user}){
     const [userWorkouts, setUserWorkouts] = useState([])
@@ -23,6 +26,9 @@ function StatsPro({user}){
 
             <RunGraphs userWorkouts={userWorkouts}/>
             <SwimGraphs userWorkouts={userWorkouts}/>
+            <BikeGraphs userWorkouts={userWorkouts}/>
+            <WeightGraphs userWorkouts={userWorkouts}/>
+            <HIITGraphs userWorkouts={userWorkouts}/>
         
 
            
