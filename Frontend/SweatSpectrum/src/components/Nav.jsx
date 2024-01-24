@@ -14,8 +14,8 @@ function Nav({ user, handleLogout }) {
     <>
       <li><Link to="/">HOME</Link></li>
       <li><Link to="/dashboard">Dashboard</Link></li>
-      <li><Link to="/statspro">Stats Pro page</Link></li>
-      <li><Link to="/analytics">Analytics Page</Link></li>
+      <li><Link to="/statspro">Stats Pro</Link></li>
+      {/* <li><Link to="/analytics">Analytics Page</Link></li> */}
       <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
     </>
   ) : (
