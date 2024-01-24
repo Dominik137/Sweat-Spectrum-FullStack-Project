@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom"
+
 function DashStats({userWorkouts}){
 
     // ++++++++++++++++++++++++++++++++++++ DAILY STREAK ++++++++++++++++++++++++++++++++++++++++++
@@ -154,12 +156,12 @@ function DashStats({userWorkouts}){
         <>
         <div className="basic-stats-container">
 
-            <article className="daily-streak">
+            <article data-tooltip="Days of consecutive workouts" data-placement="top" className="daily-streak">
                 <p className="statnum">{dailyStreak} Days</p>
                 <p> Workout Streak 🗓️</p>
             </article>
 
-            <article className="avg-calorie-burn">
+            <article data-tooltip="Average active calories burned" data-placement="top" className="avg-calorie-burn">
                 <p className="statnum">{Math.floor(averageCalorieBurn)}</p>
                 <p>Avg Calorie Burn 🔥</p>
             </article>
@@ -167,12 +169,12 @@ function DashStats({userWorkouts}){
            
 
         </div>
-        <article className="top-weekly-workout">
+        <article data-tooltip="The workout you've done the most" data-placement="bottom" className="top-weekly-workout">
                 {/* <p> Log at least one workout...</p> */}
                 <p className="statnum">{topWorkoutType}</p>
                 <p>Most Common Workout {topWorkoutEmoji}</p>
         </article>
-        <button className="more-stats">Get More Stats →</button>
+       <Link to="/statspro"> <button className="more-stats">Get More Stats →</button></Link>
         
         </>
     )
