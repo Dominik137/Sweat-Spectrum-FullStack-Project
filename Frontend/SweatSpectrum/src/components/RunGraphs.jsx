@@ -41,6 +41,38 @@ function RunGraphs({userWorkouts}){
     }
     )
 
+    //Get average heart rate for runs 
+    const getRunWorkoutAvgHR = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Run")
+            return workout["attributes"]["avg heart rate"]
+        })
+    })
+
+    //Combine all avg heart rates into one array
+    let runWorkoutAvgHR = getRunWorkoutAvgHR.flat()
+    //Remove undefined values from runWorkoutAvgHR
+    runWorkoutAvgHR = runWorkoutAvgHR.filter(function (avgHR) {
+        return avgHR != undefined;
+    }
+    )
+
+    //Get max heart rate for runs
+    const getRunWorkoutMaxHR = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Run")
+            return workout["attributes"]["max heart rate"]
+        })
+    })
+
+    //Combine all max heart rates into one array
+    let runWorkoutMaxHR = getRunWorkoutMaxHR.flat()
+    //Remove undefined values from runWorkoutMaxHR
+    runWorkoutMaxHR = runWorkoutMaxHR.filter(function (maxHR) {
+        return maxHR != undefined;
+    }
+    )
+
 
     return (
         <>
@@ -66,15 +98,15 @@ function RunGraphs({userWorkouts}){
             <article className="hr"> 
                 <Bar 
                     data={{
-                        labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                        labels: runWorkoutDates,
                         datasets: [ 
                             {
                                 label: "Avg. Heart Rate",
-                                data: [120, 130, 140],
+                                data: runWorkoutAvgHR,
                             },
                             {
                                 label: "Max. Heart Rate",
-                                data: [156, 164, 180],
+                                data: runWorkoutMaxHR,
                             },
 
                         ],

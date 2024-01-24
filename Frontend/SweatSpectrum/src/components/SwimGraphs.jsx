@@ -3,6 +3,65 @@ import {Chart as ChartJS} from "chart.js/auto"
 import {Bar} from "react-chartjs-2"
 
 function SwimGraphs({userWorkouts}){
+
+    //Get all a users swim dates
+    const getSwimWorkoutDates = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Swim")
+            return workout.date
+        })
+    })
+
+    //Combine all dates into one array
+    let swimWorkoutDates = getSwimWorkoutDates.flat()
+    //Remove undefined values from swimWorkoutDates
+    swimWorkoutDates = swimWorkoutDates.filter(function (dates) {
+        return dates != undefined;
+    }
+    )
+
+    //Get all a users swim laps
+    const getSwimWorkoutLaps = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Swim")
+            return workout["attributes"].laps
+        }
+        )
+    })
+
+    //Combine all laps into one array
+    let swimWorkoutLaps = getSwimWorkoutLaps.flat()
+    //Remove undefined values from swimWorkoutLaps
+    swimWorkoutLaps = swimWorkoutLaps.filter(function (laps) {
+        return laps != undefined;
+    }
+    )
+
+    //Get all a users swim durations
+    const getSwimWorkoutDuration = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Swim")
+            return workout.duration
+        }
+        )
+    })
+
+    //Combine all durations into one array
+    let swimWorkoutDuration = getSwimWorkoutDuration.flat()
+    //Remove undefined values from swimWorkoutDuration
+    swimWorkoutDuration = swimWorkoutDuration.filter(function (duration) {
+        return duration != undefined;
+    }
+    )
+    //Convert swimWorkoutDuration from hours:minutes:seconds to minutes
+    swimWorkoutDuration = swimWorkoutDuration.map(function (duration) {
+        let parts = duration.split(':');
+        let hours = parseInt(parts[0], 10);
+        let minutes = parseInt(parts[1], 10);
+        return String((hours * 60) + minutes);
+    });
+
+
     
     return(
         <>
@@ -11,11 +70,11 @@ function SwimGraphs({userWorkouts}){
                 <article className="distance"> 
                     <Bar 
                         data={{
-                            labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                            labels: swimWorkoutDates,
                             datasets: [ 
                                 {
-                                    label: "Distance",
-                                    data: [9.5, 3.5, 10.5],
+                                    label: "Laps",
+                                    data: swimWorkoutLaps,
                                 },
 
                             ],
@@ -28,15 +87,11 @@ function SwimGraphs({userWorkouts}){
                 <article className="hr"> 
                     <Bar 
                         data={{
-                            labels: ["2024-01-02", "2024-01-12", "2024-01-23"],
+                            labels: swimWorkoutDates,
                             datasets: [ 
                                 {
-                                    label: "Avg. Heart Rate",
-                                    data: [120, 130, 140],
-                                },
-                                {
-                                    label: "Max. Heart Rate",
-                                    data: [156, 164, 180],
+                                    label: "Duration in Minutes",
+                                    data: swimWorkoutDuration,
                                 },
 
                             ],
