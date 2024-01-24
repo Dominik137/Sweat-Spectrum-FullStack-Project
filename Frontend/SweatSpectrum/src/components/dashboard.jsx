@@ -41,7 +41,7 @@ function Dashboard({user}){
           </button>
         
      
-      <details>
+      <details open>
         <summary role="button" className="contrast">
           Sets
         </summary>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Dashboard from "./dashboard";
 
 function LogIn({ user, setUser }) {
@@ -9,6 +10,8 @@ function LogIn({ user, setUser }) {
 
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState('');
+
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -77,6 +80,7 @@ function LogIn({ user, setUser }) {
       <div className="grid">
         {user ? (
           <>
+            
             <h2>Welcome, {user.username}!</h2>
             
           </>
@@ -84,6 +88,7 @@ function LogIn({ user, setUser }) {
           <>
             <div className="test">
               <h1>Create Account</h1>
+              <article>
               <p>Enter a new username and password to create your account.</p>
               <form onSubmit={handleCreateUser}>
                 <input
@@ -107,10 +112,12 @@ function LogIn({ user, setUser }) {
                 </button>
                 <h3>{usernameStatus}</h3>
               </form>
+              </article>
             </div>
             <div>
               <h1 className="contrast">Log In!</h1>
-              <p>If you already have an account, log in.</p>
+              <article>
+                <p>If you already have an account, log in.</p>
               <form onSubmit={handleSubmit}>
                 <input
                   type="text"
@@ -129,6 +136,7 @@ function LogIn({ user, setUser }) {
                 </button>
                 <h3>{logInStatus}</h3>
               </form>
+              </article>
             </div>
           </>
         )}

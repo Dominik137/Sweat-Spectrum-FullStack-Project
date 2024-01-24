@@ -63,10 +63,14 @@ function WorkoutList({ user }) {
     <div>
       {allSets.map(set => (
         <div key={set.set_id}>
+          <details >
+          <summary role="button">Set Name: {set.set_id}</summary>
           <button onClick={() => handleButtonClick(set.set_id)} role="button" className="contrast" style={{ width: '20%' }}>
             Add New Workout for Set {set.set_id}
           </button>
+          
           <h2>Set Name: {set.set_id}</h2>
+          
           {set.workouts.map(workout => (
             <WorkoutPost
               key={workout.id}
@@ -75,6 +79,7 @@ function WorkoutList({ user }) {
               handleDelete={() => handleDelete(set.set_id, workout.id)}
             />
           ))}
+          </details>
         </div>
       ))}
     </div>

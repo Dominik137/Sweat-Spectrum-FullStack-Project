@@ -9,6 +9,20 @@ function formatTime(time) {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
+function addOneDayAndFormat(dateString) {
+  const originalDate = new Date(dateString);
+  const newDate = new Date(originalDate);
+  newDate.setDate(newDate.getDate());
+
+  const formattedDate = `${newDate.toLocaleDateString('en-US', {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+  })}`;
+
+  return formattedDate;
+}
+
 const navigate = useNavigate();
   return (
     <>
@@ -27,7 +41,7 @@ const navigate = useNavigate();
             ))}
           </ul>
         </details>
-        <p>Date: {workout.date}</p>
+        <p>Date: {addOneDayAndFormat(workout.date)}</p>
         <p>Duration: {workout.duration}</p>
         <p>id: {workout.id}</p>
         <p>Time: {formatTime(workout.time)}</p>
@@ -38,7 +52,7 @@ const navigate = useNavigate();
           onClick={() => navigate(`/edit-workout/${workout.id}`)}
           style={{ width: '20%', padding: '5px' }}
         >
-          Edit!
+          Edit ✏️
 </button>
       </article>
     </>
