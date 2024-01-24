@@ -13,9 +13,47 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;  */
+.statnum {
+  font-size:2.5em;
+}
+
+.basic-stats-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: -50px;
+
+}
+
+
+
+.daily-streak{
+  border-radius: 10px;
+  width: 45%;
+}
+
+.daily-streak:hover{
+  background-color: #3949ab;
+}
+
+.avg-calorie-burn:hover{
+  background-color: #3949ab;
+}
+
+.top-weekly-workout:hover{
+  background-color: #3949ab;
+}
+
+.avg-calorie-burn{
+  border-radius: 10px;
+  width: 45%;
+
+}
+
+.more-stats:hover{
+  border-color: #3949ab;
+  border-width: 2px;
+}
 
 .chart-area{
   padding: 20px;

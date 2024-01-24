@@ -27,7 +27,7 @@ function Dashboard({user}){
 
 
   return (
-    <div className="grid">
+    <div className="grid dash">
 
         <div>
           <h1>Dashboard</h1>

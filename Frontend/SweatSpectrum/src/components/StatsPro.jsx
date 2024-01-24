@@ -19,22 +19,23 @@ function StatsPro({user}){
         }
     }, [user]);
 
+    function hasWorkoutType(type) {
+        return userWorkouts.some(userWorkout => 
+            userWorkout.workouts.some(workout => workout.type == type)
+        );
+    }
+
     return(
         //This is the page that will display the graphs for the different workout types a user has logged, as well as link to detailed breakdown per workout type.
         <div>
             <h1>StatsPro</h1>
 
-            <RunGraphs userWorkouts={userWorkouts}/>
-            <SwimGraphs userWorkouts={userWorkouts}/>
-            <BikeGraphs userWorkouts={userWorkouts}/>
-            <WeightGraphs userWorkouts={userWorkouts}/>
-            <HIITGraphs userWorkouts={userWorkouts}/>
+            {hasWorkoutType("Run") ? <RunGraphs userWorkouts={userWorkouts}/> : <></>}
+            {hasWorkoutType("Swim") ? <SwimGraphs userWorkouts={userWorkouts}/> : <></>}
+            {hasWorkoutType("Bike") ? <BikeGraphs userWorkouts={userWorkouts}/> : <></>}
+            {hasWorkoutType("Weight Training") ? <WeightGraphs userWorkouts={userWorkouts}/> : <></>}
+            {hasWorkoutType("HIIT") ? <HIITGraphs userWorkouts={userWorkouts}/> : <></>}
         
-
-           
-
-            
-
         </div>
     )
 }

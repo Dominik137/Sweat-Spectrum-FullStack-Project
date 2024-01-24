@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom"
+
 function DashStats({userWorkouts}){
 
     // ++++++++++++++++++++++++++++++++++++ DAILY STREAK ++++++++++++++++++++++++++++++++++++++++++
@@ -8,8 +10,6 @@ function DashStats({userWorkouts}){
             return workout.date
         })
     })
-
-    console.log(getWorkoutDates)
 
     // Combine the multiple arrays of workout dates into one array
     const workoutDates = [].concat.apply([], getWorkoutDates)
@@ -62,25 +62,30 @@ function DashStats({userWorkouts}){
 
 
     // Function to get the most common workout type - NOTE: Currently doesn't work if there's not a "top" workout
-    function mostCommonWorkout(array) {
-        array.sort((a,b) => a-b);
-
-        let count = 1,
-            max = 0,
-            top;
-
-        for (let i = 1; i <array.length; i++) {
-            if (array[i] == array[i-1]) {
-                count++;
-            } else {
-                if (count > max) {
-                    max = count;
-                    top = array[i-1];
-                }
-                count = 1;
-            } 
+    function mostCommonWorkout(workouts) {
+        if (workouts.length === 0) {
+            return "Log More Workouts";
         }
-        return top
+    
+        let counts = {};
+        let maxCount = 0;
+        let mostCommonWorkout = "";
+    
+        for (let i = 0; i < workouts.length; i++) {
+            let workout = workouts[i];
+            if (!counts[workout]) {
+                counts[workout] = 1;
+            } else {
+                counts[workout]++;
+            }
+    
+            if (counts[workout] > maxCount) {
+                maxCount = counts[workout];
+                mostCommonWorkout = workout;
+            }
+        }
+    
+        return mostCommonWorkout;
     }
 
     // Create variable to store most common workout type for rendering on page
@@ -151,23 +156,25 @@ function DashStats({userWorkouts}){
         <>
         <div className="basic-stats-container">
 
-            <article className="daily-streak">
-                <p>{dailyStreak}</p>
-                <p>Day Workout Streak 🗓️</p>
+            <article data-tooltip="Days of consecutive workouts" data-placement="top" className="daily-streak">
+                <p className="statnum">{dailyStreak} Days</p>
+                <p> Workout Streak 🗓️</p>
             </article>
 
-            <article className="top-weekly-workout">
-                {/* <p> Log at least one workout...</p> */}
-                <p>{topWorkoutType}</p>
-                <p>Most Common Workout {topWorkoutEmoji}</p>
-            </article>
-
-            <article className="avg-calorie-burn">
-                <p>{Math.floor(averageCalorieBurn)}</p>
+            <article data-tooltip="Average active calories burned" data-placement="top" className="avg-calorie-burn">
+                <p className="statnum">{Math.floor(averageCalorieBurn)}</p>
                 <p>Avg Calorie Burn 🔥</p>
             </article>
 
+           
+
         </div>
+        <article data-tooltip="The workout you've done the most" data-placement="bottom" className="top-weekly-workout">
+                {/* <p> Log at least one workout...</p> */}
+                <p className="statnum">{topWorkoutType}</p>
+                <p>Most Common Workout {topWorkoutEmoji}</p>
+        </article>
+       <Link to="/statspro"> <button className="more-stats">Get More Stats →</button></Link>
         
         </>
     )
