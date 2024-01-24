@@ -3,6 +3,16 @@ import {Bar} from "react-chartjs-2"
 
 function HIITGraphs({userWorkouts}){
 
+    //Get all a users HIIT dates
+    const getHIITWorkoutDates = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "HIIT")
+            return workout.date
+        }
+        )
+    })
+    console.log(getHIITWorkoutDates)
+
     return(
         <>
         <h2>HIIT</h2>
