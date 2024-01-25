@@ -50,7 +50,7 @@ with app.app_context():
         duration="01:31:18", 
         date=datetime.strptime("2024-01-02", "%Y-%m-%d").date(), 
         time=datetime.strptime("15:20:19", "%H:%M:%S").time(), 
-        attributes='{"distance": "5.0", "pace": "15.0", "active calories": "750", "total calories": "982", "avg heart rate": "145", "max heart rate": "182", "elevation gain": "343", "notes": "really beautiful afternoon ride"}')
+        attributes='{"distance": "5.0", "pace": "15.0", "active calories": "750", "total calories": "982", "avg heart rate": "145", "max heart rate": "182", "elevation gain": "211", "notes": "really beautiful afternoon ride"}')
 
     new_workout_3 = Workout(
         type="Swim", 
@@ -99,7 +99,7 @@ with app.app_context():
         duration="01:58:18", 
         date=datetime.strptime("2024-01-13", "%Y-%m-%d").date(), 
         time=datetime.strptime("16:15:49", "%H:%M:%S").time(), 
-        attributes='{"distance": "15.0", "pace": "15.0", "active calories": "950", "total calories": "1115", "avg heart rate": "145", "max heart rate": "184", "elevation gain": "343", "notes": "beat my last duration record!"}')
+        attributes='{"distance": "15.0", "pace": "15.0", "active calories": "950", "total calories": "1115", "avg heart rate": "145", "max heart rate": "184", "elevation gain": "272", "notes": "beat my last duration record!"}')
     
     new_workout_10 = Workout(
         type="Swim",
