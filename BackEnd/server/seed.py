@@ -21,15 +21,15 @@ with app.app_context():
 
     print("Creating Sets")
     #Barretts sets - running and biking
-    new_set_1 = Set(user_id=3)
-    new_set_2 = Set(user_id=3)
-    new_set_6 = Set(user_id=3)
-    new_set_7 = Set(user_id=3)
+    new_set_1 = Set(user_id=3, name="Workout Combo")
+    new_set_2 = Set(user_id=3, name="Afternoon Delight")
+    new_set_6 = Set(user_id=3, name="Friday Strength")
+    new_set_7 = Set(user_id=3, name="Death by Exercise")
     #Doms sets - Weight training
     new_set_3 = Set(user_id=1, name="Tuesday")
     #Jacks sets - HIIT set and Swim Set (separate days) 
-    new_set_4 = Set(user_id=2)
-    new_set_5 = Set(user_id=2)
+    new_set_4 = Set(user_id=2, name="Jackie's Swimmies")
+    new_set_5 = Set(user_id=2, name="HIIT it")
     db.session.add_all([new_set_1,new_set_2,new_set_3,new_set_4,new_set_5, new_set_6, new_set_7])
     db.session.commit()
     print("Sets Created")
