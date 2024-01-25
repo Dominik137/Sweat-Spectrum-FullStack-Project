@@ -8,20 +8,18 @@ function formatTime(time) {
   const date = new Date(`1970-01-01T${time}`);
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
+function formatDate(dateString) {
+  // Assuming dateString is in the format "YYYY-MM-DD"
+  const [year, month, day] = dateString.split('-').map(Number);
+  
+  // Adjusting for the local timezone offset
+  const date = new Date(year, month - 1, day); // month is 0-based in JavaScript Date object
+  const offset = date.getTimezoneOffset();
+  const adjustedDate = new Date(date.getTime() + offset * 60 * 1000);
 
-function addOneDayAndFormat(dateString) {
-  const originalDate = new Date(dateString);
-  const newDate = new Date(originalDate);
-  newDate.setDate(newDate.getDate());
-
-  const formattedDate = `${newDate.toLocaleDateString('en-US', {
-    month: 'numeric',
-    day: 'numeric',
-    year: 'numeric',
-  })}`;
-
-  return formattedDate;
+  return adjustedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
+
 
 const navigate = useNavigate();
   return (
@@ -41,7 +39,7 @@ const navigate = useNavigate();
             ))}
           </ul>
         </details>
-        <p>Date: {addOneDayAndFormat(workout.date)}</p>
+        <p>Date: {formatDate(workout.date)}</p>
         <p>Duration: {workout.duration}</p>
         <p>id: {workout.id}</p>
         <p>Time: {formatTime(workout.time)}</p>
