@@ -4,8 +4,8 @@ import {Bar} from "react-chartjs-2"
 
 
 function RunGraphs({userWorkouts}){
-//All dates of user runs
-//All distances of user runs 
+
+    // +++++++++++++++++++++++ RUNNING DATES +++++++++++++++++++++++
 
     //Get all a users run dates
 
@@ -24,6 +24,7 @@ function RunGraphs({userWorkouts}){
     }
     )
     
+    // +++++++++++++++++++++++ RUNNING DISTANCES +++++++++++++++++++++++
 
     //Get all a users run distances
     const getRunWorkoutDistances = userWorkouts.map((userWorkout) => {
@@ -41,6 +42,7 @@ function RunGraphs({userWorkouts}){
     }
     )
 
+    // +++++++++++++++++++++++ RUNNING AVG HR +++++++++++++++++++++++
     //Get average heart rate for runs 
     const getRunWorkoutAvgHR = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -57,6 +59,8 @@ function RunGraphs({userWorkouts}){
     }
     )
 
+    // +++++++++++++++++++++++ RUNNING MAX HR +++++++++++++++++++++++
+
     //Get max heart rate for runs
     const getRunWorkoutMaxHR = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -72,7 +76,6 @@ function RunGraphs({userWorkouts}){
         return maxHR != undefined;
     }
     )
-
 
     return (
         <>

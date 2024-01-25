@@ -3,8 +3,9 @@ import {Bar} from "react-chartjs-2"
 
 function BikeGraphs({userWorkouts}){
 
-    //Get all a users bike dates
+    // +++++++++++++++++++++++ BIKING DATES +++++++++++++++++++++++
 
+    //Get all a users bike dates
     const getBikeWorkoutDates = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
             if (workout.type == "Bike")
@@ -20,6 +21,8 @@ function BikeGraphs({userWorkouts}){
         return dates != undefined;
     }
     )
+
+    // +++++++++++++++++++++++ BIKING DISTANCES +++++++++++++++++++++++
 
     //Get all a users bike distances
     const getBikeWorkoutDistances = userWorkouts.map((userWorkout) => {
@@ -39,6 +42,8 @@ function BikeGraphs({userWorkouts}){
     }
     )
 
+    // +++++++++++++++++++++++ BIKING ELEVATION +++++++++++++++++++++++
+
     //Get elevation gains for bike rides
     const getBikeWorkoutElevationGain = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -55,9 +60,6 @@ function BikeGraphs({userWorkouts}){
         return elevationGain != undefined;
     }
     )
-
-
-
 
     return(
         <>

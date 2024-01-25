@@ -3,6 +3,8 @@ import {Bar} from "react-chartjs-2"
 
 function WeightGraphs({userWorkouts}){
 
+    // +++++++++++++++++++++++ WEIGHT DATES +++++++++++++++++++++++
+
     //Get all a users weight dates
     const getWeightWorkoutDates = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -19,6 +21,8 @@ function WeightGraphs({userWorkouts}){
         return dates != undefined;
     }
     )
+
+        // +++++++++++++++++++++++ WEIGHT WEIGHTS +++++++++++++++++++++++
 
     //Get all a users weights 
     const getWeightWorkoutWeights = userWorkouts.map((userWorkout) => {
@@ -37,7 +41,9 @@ function WeightGraphs({userWorkouts}){
     }
     )
 
-    //Get all a users weight trainingsets
+    // +++++++++++++++++++++++ WEIGHT SETS +++++++++++++++++++++++
+
+    //Get all a users weight training sets
     const getWeightWorkoutSets = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
             if (workout.type == "Weight Training")
@@ -53,6 +59,8 @@ function WeightGraphs({userWorkouts}){
         return sets != undefined;
     }
     )
+
+    // +++++++++++++++++++++++ WEIGHT REPS +++++++++++++++++++++++
 
     //Get all a users weight training reps
     const getWeightWorkoutReps = userWorkouts.map((userWorkout) => {
@@ -71,7 +79,7 @@ function WeightGraphs({userWorkouts}){
     }
     )
 
-
+    // +++++++++++++++++++++++ WEIGHT AVG HR +++++++++++++++++++++++
 
     //Get average heart rate for weight training
     const getWeightWorkoutAvgHR = userWorkouts.map((userWorkout) => {
@@ -89,6 +97,8 @@ function WeightGraphs({userWorkouts}){
         return avgHR != undefined;
     }
     )
+
+    // +++++++++++++++++++++++ WEIGHT MAX HR +++++++++++++++++++++++
 
     //Get max heart rate for weight training
     const getWeightWorkoutMaxHR = userWorkouts.map((userWorkout) => {
