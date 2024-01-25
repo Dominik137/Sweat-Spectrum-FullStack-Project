@@ -173,4 +173,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+signatureColor{
+  background-color: #3949ab;
+}
+
 }

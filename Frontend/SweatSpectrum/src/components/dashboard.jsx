@@ -2,6 +2,7 @@ import DashStats from "./DashStats"
 import WorkoutList from "./DashWorkouts"
 import {useState, useEffect} from "react"
 import { useNavigate } from 'react-router-dom';
+import '../index.css'
 
 function Dashboard({user}){
    
@@ -36,12 +37,12 @@ function Dashboard({user}){
         </div>
         <div>
           <h1>Add a new Workout Group</h1>
-          <button onClick={handleAddNewSet} role="button" style={{ width: '20%' }} className="contrast">
+          <button onClick={handleAddNewSet} role="button" style={{ width: '20%' }} className="">
             Add New Workout Group
           </button>
         
      
-      <details open>
+      <details open >
         <summary role="button" className="contrast">
           Workout Groups
         </summary>
