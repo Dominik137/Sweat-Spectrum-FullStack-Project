@@ -37,6 +37,42 @@ function WeightGraphs({userWorkouts}){
     }
     )
 
+    //Get all a users weight trainingsets
+    const getWeightWorkoutSets = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Weight Training")
+                return workout["attributes"].sets
+        }
+        )
+    })
+
+    //Combine all sets into one array
+    let weightWorkoutSets = getWeightWorkoutSets.flat()
+    //Remove undefined values from weightWorkoutSets
+    weightWorkoutSets = weightWorkoutSets.filter(function (sets) {
+        return sets != undefined;
+    }
+    )
+
+    //Get all a users weight training reps
+    const getWeightWorkoutReps = userWorkouts.map((userWorkout) => {
+        return userWorkout.workouts.map((workout) => {
+            if (workout.type == "Weight Training")
+                return workout["attributes"].reps
+        }
+        )
+    })
+
+    //Combine all reps into one array
+    let weightWorkoutReps = getWeightWorkoutReps.flat()
+    //Remove undefined values from weightWorkoutReps
+    weightWorkoutReps = weightWorkoutReps.filter(function (reps) {
+        return reps != undefined;
+    }
+    )
+
+
+
     //Get average heart rate for weight training
     const getWeightWorkoutAvgHR = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -84,8 +120,16 @@ function WeightGraphs({userWorkouts}){
                         labels: weightWorkoutDates,
                         datasets: [ 
                             {
-                                label: "Avg. Heart Rate",
+                                label: "Weight",
                                 data: weightWorkoutWeights,
+                            },
+                            {
+                                label: "Reps",
+                                data: weightWorkoutReps,
+                            },
+                            {
+                                label: "Sets",
+                                data: weightWorkoutSets,
                             },
 
                         ],
