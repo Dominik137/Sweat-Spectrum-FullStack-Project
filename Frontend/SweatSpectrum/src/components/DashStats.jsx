@@ -151,6 +151,10 @@ function DashStats({userWorkouts}){
     // Create variable to store average calorie burn for rendering on page
     let averageCalorieBurn = getAverage(activeCals)
 
+    if (averageCalorieBurn == NaN) {
+        return averageCalorieBurn = 0
+    }
+
 
     return(
         <>
