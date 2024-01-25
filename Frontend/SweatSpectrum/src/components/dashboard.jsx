@@ -35,15 +35,15 @@ function Dashboard({user}){
           <hr />
         </div>
         <div>
-          <h1>Add a new Set</h1>
+          <h1>Add a new Workout Group</h1>
           <button onClick={handleAddNewSet} role="button" style={{ width: '20%' }} className="contrast">
-            Add New Set
+            Add New Workout Group
           </button>
         
      
       <details open>
         <summary role="button" className="contrast">
-          Sets
+          Workout Groups
         </summary>
         <WorkoutList user={user} />
       </details>

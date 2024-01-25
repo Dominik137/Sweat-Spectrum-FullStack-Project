@@ -58,18 +58,20 @@ function WorkoutList({ user }) {
         console.error('Error deleting workout:', error);
       });
   };
+  
+console.log(allSets)
 
   return (
     <div>
       {allSets.map(set => (
         <div key={set.set_id}>
           <details >
-          <summary role="button">Set Name: {set.set_id}</summary>
+          <summary role="button">{set.name} </summary>
           <button onClick={() => handleButtonClick(set.set_id)} role="button" className="contrast" style={{ width: '20%' }}>
-            Add New Workout for Set {set.set_id}
+            Add New Workout for: {set.name}
           </button>
           
-          <h2>Set Name: {set.set_id}</h2>
+          
           
           {set.workouts.map(workout => (
             <WorkoutPost

@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, event
 from sqlalchemy_serializer import SerializerMixin
 import datetime
 
@@ -12,6 +12,7 @@ from services import db, bcrypt
 class Set(db.Model, SerializerMixin):
     __tablename__ = "Sets"
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
     #Set user relationship
@@ -109,6 +110,20 @@ class Set_Workout(db.Model, SerializerMixin):
             elif isinstance(value, datetime.time):
                 data[key] = value.isoformat()
         return data
+    # THIS DELEETETETETETTETES the set after there are no more workouts in it !
+@event.listens_for(Set_Workout, 'after_insert')
+@event.listens_for(Set_Workout, 'after_delete')
+def check_set_workouts_change(mapper, connection, target):
+    # Check if the set associated with the Set_Workout has no more workout associations
+    if target.set and not target.set.Set_Workouts:
+        # Delete the set if it has no more workout associations
+        db.session.delete(target.set)
+        
+def your_route_or_function():
+  
+    # Commit the changes after the route/function has executed
+    db.session.commit()
+
 
 
 ##################################

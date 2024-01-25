@@ -1,5 +1,6 @@
 import LogIn from "./login";
 import Dashboard from "./dashboard";
+import '../App.css'
 
 function Home({ setUser, user }) {
   return (
@@ -10,7 +11,7 @@ function Home({ setUser, user }) {
       ) : (
         <div className="">
           <div>
-            <h1>Welcome to Sweat Spectrum!</h1>
+            <h1 className="defaultFont">Welcome to Sweat Spectrum!</h1>
           </div>
           <div>
             <h3>Track your workouts and get motivated.</h3>

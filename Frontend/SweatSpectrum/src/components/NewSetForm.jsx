@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 function NewSetForm({ user }) {
   const location = useLocation();
   const setIds = location.state?.setIds || [];
+  const [setName, setSetName] = useState("");
   const [workoutDetails, setWorkoutDetails] = useState({
     type: "",
     hours: 0,
@@ -47,6 +48,10 @@ function NewSetForm({ user }) {
       }));
     }
   }
+
+  
+
+
   function postNewWorkout() {
     if (!workoutDetails.type) {
       alert("Please provide a workout type.");
@@ -92,7 +97,8 @@ function NewSetForm({ user }) {
       duration: `${formattedHours}:${formattedMinutes}:${formattedSeconds}`,
       date: workoutDetails.date.toISOString().split('T')[0],
       time: formattedTime,
-      attributes: JSON.stringify(attributesObject)
+      attributes: JSON.stringify(attributesObject),
+      name: setName
     };
   
     fetch(`/api/new_workout/${user?.id}/0`, {
@@ -110,6 +116,7 @@ function NewSetForm({ user }) {
       .catch((error) => {
         console.error("Error posting new workout:", error);
       });
+
   }
   
 
@@ -133,10 +140,20 @@ function NewSetForm({ user }) {
 
   return (
     <div>
-      <h2>New Set Form</h2>
-      <p>Input a new workout and it will be entered under new set!</p>
-      <p>Set IDs: {setIds}</p>
+      <h2>New Workout Group Form</h2>
+      <p>Input a new workout and name for the workout group !</p>
       <form>
+              <label>
+          Set Name:
+          <input
+            type="text"
+            name="setName"
+            value={setName}
+            onChange={(event) => setSetName(event.target.value)}
+            required
+          />
+        </label>
+        <br />
         <label>
           Workout Type:
           <select
@@ -216,7 +233,7 @@ function NewSetForm({ user }) {
         </label>
         <br />
         {renderAttributesInputs()}
-        <button type="button" role="button" className="contrast" onClick={postNewWorkout}>
+        <button type="button" role="button" className="contrast"  onClick={postNewWorkout}>
           Post New Workout
         </button>
       </form>

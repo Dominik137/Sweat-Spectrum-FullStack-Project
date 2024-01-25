@@ -136,7 +136,8 @@ function NewWorkoutForm({ user }) {
       <h2>Add A New Workout</h2>
       {/* <p>Set IDs: {setIds}</p> */}
       <form>
-        <label>
+        <div className="grid">
+        <label style={{marginTop: '25px'}}>
           Workout Type:
           <select
             name="type"
@@ -151,51 +152,13 @@ function NewWorkoutForm({ user }) {
             <option value="HIIT">HIIT</option>
             <option value="Swim">Swim</option>
           </select>
-        </label>
-        <br />
-        <label>
-          Duration:
-          <div>
-            <input
-              type="number"
-              name="hours"
-              value={workoutDetails.hours}
-              onChange={handleChange}
-              placeholder="Hours"
-              min="0"
-              max="23"
-              required
-            />
-            :
-            <input
-              type="number"
-              name="minutes"
-              value={workoutDetails.minutes}
-              onChange={handleChange}
-              placeholder="Minutes"
-              min="0"
-              max="59"
-              required
-            />
-            :
-            <input
-              type="number"
-              name="seconds"
-              value={workoutDetails.seconds}
-              onChange={handleChange}
-              placeholder="Seconds"
-              min="0"
-              max="59"
-              required
-            />
-          </div>
-        </label>
-        <br />
-        <label>
+          <label >
+            <br></br>
           Date:
           <DatePicker
             selected={workoutDetails.date}
             onChange={(date) => setWorkoutDetails((prevDetails) => ({ ...prevDetails, date }))}
+            
           />
         </label>
         <br />
@@ -207,9 +170,56 @@ function NewWorkoutForm({ user }) {
             name="time"
             value={workoutDetails.time}
             onChange={handleChange}
+            style={{ width: '450px' }} 
           />
         </label>
         <br />
+        </label>
+        
+        <label>
+          Duration:
+          <br></br>
+          Hours
+          <div>
+            <input
+              type="number"
+              name="hours"
+              value={workoutDetails.hours}
+              onChange={handleChange}
+              placeholder="Hours"
+              min="0"
+              max="23"
+              required
+            />
+            
+            Minutes
+            <input
+              type="number"
+              name="minutes"
+              value={workoutDetails.minutes}
+              onChange={handleChange}
+              placeholder="Minutes"
+              min="0"
+              max="59"
+              required
+            />
+            Seconds
+            <input
+              type="number"
+              name="seconds"
+              value={workoutDetails.seconds}
+              onChange={handleChange}
+              placeholder="Seconds"
+              min="0"
+              max="59"
+              required
+              
+            />
+          </div>
+        </label>
+        </div>
+        <br />
+        
         <label>
           Attributes:
         </label>

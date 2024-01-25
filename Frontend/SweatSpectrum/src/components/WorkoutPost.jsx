@@ -41,9 +41,9 @@ const navigate = useNavigate();
         </details>
         <p>Date: {formatDate(workout.date)}</p>
         <p>Duration: {workout.duration}</p>
-        <p>id: {workout.id}</p>
+        {/* <p>id: {workout.id}</p> */}
         <p>Time: {formatTime(workout.time)}</p>
-        <button role="button" className="contrast" onClick={()=>handleDelete(workout.id)} style={{ width: '20%', padding: '5px',  }} >Delete 🗑️</button>
+        <button role="button" className="contrast" onClick={()=>handleDelete(workout.id)} style={{ width: '20%', padding: '5px', marginRight: '10px' }} >Delete 🗑️</button>
         <button
           role="button"
           className="contrast"

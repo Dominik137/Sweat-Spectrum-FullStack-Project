@@ -115,24 +115,36 @@ def get_user_workouts(user_id):
 
             for set_workout in set_workouts:
                 workout_details = Workout.query.get(set_workout.workout_id)
-                workout_dict = workout_details.to_dict()
-                workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
-                workouts_for_set.append(workout_dict)
+                if workout_details:
+                    workout_dict = workout_details.to_dict()
+                    workout_dict['attributes'] = json.loads(workout_dict['attributes'].replace("'", '"'))
+                    workouts_for_set.append(workout_dict)
 
             # Include set ID and workouts in the response
             user_workouts_list.append({
                 'set_id': set.id,
-                'workouts': workouts_for_set
+                'workouts': workouts_for_set,
+                'name': set.name
             })
 
         # Wrap the entire response in another list containing set IDs
         # response_data = [{'set_ids': [set['set_id'] for set in user_workouts_list]}, user_workouts_list]
-        
+
         return make_response(jsonify(user_workouts_list), 200)
         
     elif request.method == "POST":
-        #Post request added here - adding a workout for a user
-        pass
+        data = request.json
+        set_name = data.get('name')
+
+        # Validate the set_name or perform any other necessary actions
+        if not set_name:
+            return make_response(jsonify({"error": "Set name is required"}), 400)
+
+        # Create a new set with the provided set_name
+        new_set = Set(name=set_name, user_id=user_id)
+        db.session.add(new_set)
+        db.session.commit()
+
     elif request.method == "DELETE":
         #Delete request added here - deleting a workout for a user
         pass
@@ -191,6 +203,7 @@ def create_user_workout(user_id, set_id):
         if set_id == 0:
             try:
                 data = request.get_json()
+                name = data.get('name')
                 workout = Workout(
                     type=data['type'],
                     duration=data['duration'],
@@ -201,7 +214,7 @@ def create_user_workout(user_id, set_id):
                 db.session.add(workout)
                 db.session.commit()
                 
-                new_set = Set(user_id=user_id)
+                new_set = Set(user_id=user_id, name=name)
                 db.session.add(new_set)
                 db.session.commit()
 
@@ -240,6 +253,7 @@ def create_user_workout(user_id, set_id):
                 return jsonify(workout.to_dict()), 201
             except Exception as e:
                 return make_response({"errors": [str(e)]}, 404)
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
