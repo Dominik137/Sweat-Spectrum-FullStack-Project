@@ -4,8 +4,8 @@ import {Bar} from "react-chartjs-2"
 
 
 function RunGraphs({userWorkouts}){
-//All dates of user runs
-//All distances of user runs 
+
+    // +++++++++++++++++++++++ RUNNING DATES +++++++++++++++++++++++
 
     //Get all a users run dates
 
@@ -24,6 +24,7 @@ function RunGraphs({userWorkouts}){
     }
     )
     
+    // +++++++++++++++++++++++ RUNNING DISTANCES +++++++++++++++++++++++
 
     //Get all a users run distances
     const getRunWorkoutDistances = userWorkouts.map((userWorkout) => {
@@ -41,6 +42,22 @@ function RunGraphs({userWorkouts}){
     }
     )
 
+    // Combine runWorkoutDates and runWorkoutDistances into one array of objects & convert date strings into date objects.
+    let combinedDateDist = runWorkoutDates.map((date, index) => {
+        return {
+            date: new Date(date),
+            distance: runWorkoutDistances[index]
+        };
+        });
+
+        //Sort by date - earliest first, later last 
+        combinedDateDist.sort((a, b) => a.date - b.date);
+
+        
+        runWorkoutDates = combinedDateDist.map(item => item.date.toISOString().slice(0,10)); 
+        runWorkoutDistances = combinedDateDist.map(item => item.distance);
+
+    // +++++++++++++++++++++++ RUNNING AVG HR +++++++++++++++++++++++
     //Get average heart rate for runs 
     const getRunWorkoutAvgHR = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -48,6 +65,8 @@ function RunGraphs({userWorkouts}){
             return workout["attributes"]["avg heart rate"]
         })
     })
+
+
 
     //Combine all avg heart rates into one array
     let runWorkoutAvgHR = getRunWorkoutAvgHR.flat()
@@ -57,6 +76,23 @@ function RunGraphs({userWorkouts}){
     }
     )
 
+
+    let combinedDateAvgHR = runWorkoutDates.map((date, index) => {
+        return {
+            date: new Date(date), // Convert the date strings into Date objects
+            avgHR: runWorkoutAvgHR[index] // Include the average heart rate
+        };
+    });
+    
+    combinedDateAvgHR.sort((a, b) => a.date - b.date);
+    
+    runWorkoutDates = combinedDateAvgHR.map(item => item.date.toISOString().slice(0,10)); 
+    runWorkoutAvgHR = combinedDateAvgHR.map(item => item.avgHR); 
+
+    
+
+    // +++++++++++++++++++++++ RUNNING MAX HR +++++++++++++++++++++++
+
     //Get max heart rate for runs
     const getRunWorkoutMaxHR = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -64,6 +100,7 @@ function RunGraphs({userWorkouts}){
             return workout["attributes"]["max heart rate"]
         })
     })
+    console.log(getRunWorkoutMaxHR)
 
     //Combine all max heart rates into one array
     let runWorkoutMaxHR = getRunWorkoutMaxHR.flat()
@@ -72,6 +109,19 @@ function RunGraphs({userWorkouts}){
         return maxHR != undefined;
     }
     )
+
+    // Combine runWorkoutDates and runWorkoutMaxHR into one array of objects & convert date strings into date objects.
+    let combinedDateMaxHR = runWorkoutDates.map((date, index) => {
+        return {
+            date: new Date(date), // Convert the date strings into Date objects
+            maxHR: runWorkoutMaxHR[index] // Include the average heart rate
+        };
+    });
+    
+    combinedDateMaxHR.sort((a, b) => a.date - b.date);
+    
+    runWorkoutDates = combinedDateMaxHR.map(item => item.date.toISOString().slice(0,10)); 
+    runWorkoutMaxHR = combinedDateMaxHR.map(item => item.maxHR); 
 
 
     return (

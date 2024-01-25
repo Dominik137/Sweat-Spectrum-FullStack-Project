@@ -4,6 +4,8 @@ import {Bar} from "react-chartjs-2"
 
 function SwimGraphs({userWorkouts}){
 
+    // +++++++++++++++++++++++ SWIM DATES +++++++++++++++++++++++
+
     //Get all a users swim dates
     const getSwimWorkoutDates = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -19,6 +21,8 @@ function SwimGraphs({userWorkouts}){
         return dates != undefined;
     }
     )
+
+    // +++++++++++++++++++++++ SWIM LAPS +++++++++++++++++++++++
 
     //Get all a users swim laps
     const getSwimWorkoutLaps = userWorkouts.map((userWorkout) => {
@@ -36,6 +40,8 @@ function SwimGraphs({userWorkouts}){
         return laps != undefined;
     }
     )
+
+    // +++++++++++++++++++++++ SWIM DURATIONS +++++++++++++++++++++++
 
     //Get all a users swim durations
     const getSwimWorkoutDuration = userWorkouts.map((userWorkout) => {
@@ -60,9 +66,7 @@ function SwimGraphs({userWorkouts}){
         let minutes = parseInt(parts[1], 10);
         return String((hours * 60) + minutes);
     });
-
-
-    
+ 
     return(
         <>
         <div className="stats-section">

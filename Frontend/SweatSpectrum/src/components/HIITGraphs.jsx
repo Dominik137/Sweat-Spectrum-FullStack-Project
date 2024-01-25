@@ -3,6 +3,8 @@ import {Bar, Radar} from "react-chartjs-2"
 
 function HIITGraphs({userWorkouts}){
 
+    // +++++++++++++++++++++++ HIIT DATES +++++++++++++++++++++++
+
     //Get all a users HIIT dates
     const HIITWorkoutDates = userWorkouts.flatMap((userWorkout) => {
         return userWorkout.workouts
@@ -10,6 +12,7 @@ function HIITGraphs({userWorkouts}){
             .map((workout) => workout.date);
     });
 
+    // +++++++++++++++++++++++ HIIT WARMUPS +++++++++++++++++++++++
 
     //Get all a users HIIT warmups
     const getHIITWorkoutWarmups = userWorkouts.map((userWorkout) => {
@@ -28,6 +31,8 @@ function HIITGraphs({userWorkouts}){
     }
     )
 
+    // +++++++++++++++++++++++ HIIT COOLDOWNS +++++++++++++++++++++++
+
     //Get all a users HIIT cooldowns
     const getHIITWorkoutCooldowns = userWorkouts.map((userWorkout) => {
         return userWorkout.workouts.map((workout) => {
@@ -45,6 +50,8 @@ function HIITGraphs({userWorkouts}){
     }
     )
 
+    // +++++++++++++++++++++++ HIIT AVG HR +++++++++++++++++++++++
+
     //Get average heart rate for HIIT
     const HIITWorkoutActiveCal = userWorkouts.flatMap((userWorkout) => {
         return userWorkout.workouts
@@ -52,6 +59,7 @@ function HIITGraphs({userWorkouts}){
             .map((workout) => workout["attributes"]["active calories"]);
     });
 
+    // +++++++++++++++++++++++ HIIT MAX HR +++++++++++++++++++++++
 
     //Get max heart rate for HIIT
     const HIITWorkoutTotalCal = userWorkouts.flatMap((userWorkout) => {
@@ -59,8 +67,6 @@ function HIITGraphs({userWorkouts}){
             .filter((workout) => workout.type == "HIIT")
             .map((workout) => workout["attributes"]["total calories"]);
     });
-
-
 
     return(
         <>

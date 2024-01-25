@@ -13,9 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 } */
 
+.navvy{
+  margin-bottom:40px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #173587;
+}
+
 .statnum {
   font-size:2.5em;
 }
+
 
 .basic-stats-container{
   display: flex;
