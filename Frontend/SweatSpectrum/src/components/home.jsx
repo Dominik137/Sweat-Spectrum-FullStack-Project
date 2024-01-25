@@ -14,7 +14,7 @@ function Home({ setUser, user }) {
             <h1 className="defaultFont">Welcome to Sweat Spectrum!</h1>
           </div>
           <div>
-            <h3>Track your workouts and get motivated.</h3>
+            <h3>Track your workouts and get motivated. 💪</h3>
           </div>
           <div>
             {/* Additional content goes here if needed */}
