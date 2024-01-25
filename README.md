@@ -67,3 +67,7 @@ http://localhost:3000/
 ## Screens
 
 ![SweatSpectrum Landing Page with Create Account and Login](<Screenshot 2024-01-25 at 4.34.11 PM.png>)
+
+![SweatSpectrum Dash with Stats modules and add new workout button](<Screenshot 2024-01-25 at 4.40.39 PM.png>)
+
+![SweatSpectrum Graphs - Graph showing weight, sets, and reps for weight training](<Screenshot 2024-01-25 at 4.41.06 PM.png>)
