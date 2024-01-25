@@ -156,12 +156,12 @@ function DashStats({userWorkouts}){
         <>
         <div className="basic-stats-container">
 
-            <article data-tooltip="Days of consecutive workouts" data-placement="top" className="daily-streak">
+            <article data-theme="dark" data-tooltip="Days of consecutive workouts" data-placement="top" className="daily-streak">
                 <p className="statnum">{dailyStreak} Days</p>
                 <p> Workout Streak 🗓️</p>
             </article>
 
-            <article data-tooltip="Average active calories burned" data-placement="top" className="avg-calorie-burn">
+            <article data-theme="dark" data-tooltip="Average active calories burned" data-placement="top" className="avg-calorie-burn">
                 <p className="statnum">{Math.floor(averageCalorieBurn)}</p>
                 <p>Avg Calorie Burn 🔥</p>
             </article>
@@ -169,12 +169,14 @@ function DashStats({userWorkouts}){
            
 
         </div>
-        <article data-tooltip="The workout you've done the most" data-placement="bottom" className="top-weekly-workout">
+        <article data-theme="dark" data-tooltip="The workout you've done the most" data-placement="bottom" className="top-weekly-workout">
                 {/* <p> Log at least one workout...</p> */}
                 <p className="statnum">{topWorkoutType}</p>
                 <p>Most Common Workout {topWorkoutEmoji}</p>
         </article>
-       <Link to="/statspro"> <button className="more-stats">Get More Stats →</button></Link>
+
+       <Link to="/statspro" className="contrast"> <button className="contrast" role="button">Get More Stats →</button></Link>
+
         
         </>
     )
