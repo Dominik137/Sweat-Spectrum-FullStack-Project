@@ -6,6 +6,7 @@
   justify-content: center;
   text-align: center;
   padding: 0 30px; 
+  --primary: #5e35b1
 }
 defaultFont {
   font-family: 'Bitter', serif, 'Chakra Petch', sans-serif;
